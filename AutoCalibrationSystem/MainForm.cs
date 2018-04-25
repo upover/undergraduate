@@ -1654,7 +1654,5 @@ namespace AutoCalibrationSystem
             }
             caliProcess.setTotalNumByType(caliData);
         }
-        private void test() { 
-        }
     }
 }

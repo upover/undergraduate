@@ -58,3 +58,6 @@ E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibr
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
