@@ -28,6 +28,7 @@ namespace AutoCalibrationSystem
         public int currentItem;    //当前校准项
         public int maxNum;
         public int minNum;
+        public float tempValue;
         public GridViewModel()
         {
             minNum = MINNUM;

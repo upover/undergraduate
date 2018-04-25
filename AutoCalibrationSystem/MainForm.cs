@@ -247,6 +247,7 @@ namespace AutoCalibrationSystem
             //显示列表
             //IntiCaliItemGridView();
             IntiGridView(EnumMode.IACI);
+            //先调用下面函数的是radioButton_CheckedChanged
             Load_Page(false);
 
         }
@@ -528,7 +529,7 @@ namespace AutoCalibrationSystem
                 }
             }
             BindingList<CaliItem> tempItems = new BindingList<CaliItem>(); //数据源
-            this.gridViewModel.getItemsList(caliData, tempItems);
+            this.gridViewModel.getItemsList(caliData, tempItems);//给数据源赋值
             this.dgvCaliItem.DataSource = tempItems;  //绑定数据源
             //清除默认选中项，选中项为上次修改项
             this.dgvCaliItem.ClearSelection();
@@ -541,6 +542,76 @@ namespace AutoCalibrationSystem
 //            this.dgvCaliItem.FirstDisplayedScrollingRowIndex = this.gridViewModel.selectIndex;
             labelCurPage.Text = "当前页："+(this.gridViewModel.currentPage+1).ToString()+"/" + (this.gridViewModel.pageCount).ToString();//当前页
             labelTotalRecord.Text = "总记录：" + this.gridViewModel.recordCount.ToString();//总记录数 
+            this.dgvCaliItem.CellValidating += dgvCaliItem_CellValidating;
+            this.dgvCaliItem.DataError += dgvCaliItem_DataError;
+        }
+
+        void dgvCaliItem_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            return;
+        }
+        void dgvCaliItem_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            float min = 0.0f;
+            float max = 0.0f;
+            switch (gridViewModel.curMode) { 
+                case EnumMode.IACI:
+                    max = 4000.0f;
+                    break;
+                case EnumMode.IACF:
+                case EnumMode.VACF:
+                    max = 1000.0f;
+                    break;
+                case EnumMode.IDC:
+                    max = -4000.0f;
+                    max = 4000.0f;
+                    break;
+                case EnumMode.VDCL:
+                    min = -1.0f;
+                    max = 1.0f;
+                    break;
+                case EnumMode.VACVL:
+                    min = 0.0f;
+                    max = 1.0f;
+                    break;
+                case EnumMode.VDCHP:
+                case EnumMode.VACVH:
+                    min = 1.0f;
+                    max = 20.0f;
+                    break;
+                case EnumMode.VDCHN:
+                    min = -20.0f;
+                    max = -1.0f;
+                    break;
+            }
+            if (e.ColumnIndex < 1 || e.ColumnIndex > 3)
+            {
+                return;
+            }
+            // Confirm that the cell is not empty.
+            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
+            {
+                e.Cancel = true;
+                MessageBox.Show("输入不能为空！");
+                this.dgvCaliItem.CancelEdit();
+            }
+            //判断是否符合范围
+            else{
+                try { 
+                    float temp = float.Parse(e.FormattedValue.ToString());
+                    if(temp - min < -0.0001f || temp - max > 0.0001f){
+                         e.Cancel = true;
+                        MessageBox.Show("输入范围超出限制！");
+                        this.dgvCaliItem.CancelEdit();
+                    }
+                }
+                catch(FormatException)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("输入不是有效数值！");
+                    this.dgvCaliItem.CancelEdit();
+                }
+            }
         }
         //更新记录数
         private void refreshRecord()
@@ -556,6 +627,7 @@ namespace AutoCalibrationSystem
                 gridViewModel.currentPage = 0;
             gridViewModel.curModePage -=1;
             Load_Page(false);
+            SetCaliItemRatioButton(this.gridViewModel.curMode);
         }
         //下一页
         private void btnNextPage_Click(object sender, EventArgs e)
@@ -565,6 +637,7 @@ namespace AutoCalibrationSystem
                 gridViewModel.currentPage = gridViewModel.pageCount - 1;
             gridViewModel.curModePage += 1;
             Load_Page(false);
+            SetCaliItemRatioButton(this.gridViewModel.curMode);
         }
         //增加校准点
         private void btnAddPoint_Click(object sender, EventArgs e)
@@ -628,6 +701,38 @@ namespace AutoCalibrationSystem
         private void btnReset_Click(object sender, EventArgs e)
         {
 
+        }
+        //上下页翻页时，显示当前校准项
+        private void SetCaliItemRatioButton(EnumMode mode) {
+            switch (mode) { 
+                case EnumMode.IACI:
+                    this.rbIACI.Checked = true;
+                    break;
+                case EnumMode.IACF:
+                    this.rbIACF.Checked = true;
+                    break;
+                case EnumMode.IDC:
+                    this.rbIDC.Checked = true;
+                    break;
+                case EnumMode.VACF:
+                    this.rbVACF.Checked = true;
+                    break;
+                case EnumMode.VACVL:
+                    this.rbVACVL.Checked = true;
+                    break;
+                case EnumMode.VACVH:
+                    this.rbVACVH.Checked = true;
+                    break;
+                case EnumMode.VDCL:
+                    this.rbVDCL.Checked = true;
+                    break;
+                case EnumMode.VDCHP:
+                    this.rbVDCHP.Checked = true;
+                    break;
+                case EnumMode.VDCHN:
+                    this.rbVDCHN.Checked = true;
+                    break;
+            }            
         }
         //根据当前校准选项，变换单位，点数限制等
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -704,6 +809,15 @@ namespace AutoCalibrationSystem
         //开始校准
         private void btnstartcali_Click(object sender, EventArgs e)
         {
+            /*
+            if(caliProcess.curNum >= caliProcess.curModeTotal)
+            {
+                caliProcess.curNum = 0;
+            }
+            caliProcess.curNum++;             
+            Console.Write(caliData.vacvData[caliProcess.curNum].Source);
+            */
+            
             if (caliState == EnumCaliState.INITI)
             {
                 //设置定时器定时时间
@@ -788,8 +902,7 @@ namespace AutoCalibrationSystem
             }
             instrumentsState.CS9010State = EnumInstrumentState.INIT;
             caliProcess.complete = EnumCaliState.START; 
-            caliState = EnumCaliState.START;
- 
+            caliState = EnumCaliState.START;             
         }
         //暂停校准
         private void btnpausecali_Click(object sender, EventArgs e)
