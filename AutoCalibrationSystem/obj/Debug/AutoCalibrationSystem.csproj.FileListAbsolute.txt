@@ -1,0 +1,57 @@
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.Properties.Resources.resources
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.MainForm.resources
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.CaliItemSetForm.resources
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\DMSkin.dll
+C:\Users\chentao\Documents\Visual Studio 2013\Projects\graduation\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ComSetForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.CaliItemSetForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ComSetForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.MainForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.Properties.Resources.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\DMSkin.dll
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
+G:\研究生\毕业设计\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\DMSkin.dll
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.CaliItemSetForm.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ComSetForm.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.MainForm.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.Properties.Resources.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+G:\研究生\毕业设计\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+G:\undergraduate\GraduateDesign\project\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+G:\undergraduate\GraduateDesign\project\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+G:\undergraduate\GraduateDesign\project\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\DMSkin.dll
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.CaliItemSetForm.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ComSetForm.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.MainForm.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.Properties.Resources.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
