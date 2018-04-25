@@ -55,3 +55,6 @@ E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibr
 E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
 E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
 E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
