@@ -68,11 +68,11 @@ namespace AutoCalibrationSystem
         private int sendcount9920B = 0;
         
         //
-        public enum StateCS9920 { STOP, OUT_START, OUT_STABLE, SET_VALUE, SET_TIME};
+        public enum StateSource { STOP, OUT_START, OUT_STABLE, SET_VALUE, SET_TIME};
 
-        public StateCS9920 stateCS9920B = StateCS9920.STOP;
-        public StateCS9920 stateCS9920A = StateCS9920.STOP;
-
+        public StateSource stateCS9920B = StateSource.STOP;
+        public StateSource stateCS9920A = StateSource.STOP;
+        public StateSource stateFluke5520A = StateSource.STOP;
         //仪表状态
         InstrumentsState instrumentsState = new InstrumentsState();
 
@@ -861,7 +861,7 @@ namespace AutoCalibrationSystem
                     {
                         Fluke5520ATimer.Interval = 3000;
                         Fluke5520ATimer.Enabled = true;
-                        instrumentsState.Fluke5520AState = EnumInstrumentState.REMOTE;
+                        instrumentsState.Fluke5520AState = EnumInstrumentState.LOCAL;
                     }
                     break;
                 case EnumMode.VACVH:
@@ -1035,11 +1035,11 @@ namespace AutoCalibrationSystem
                     instrumentsState.CS9010State = EnumInstrumentState.REMOTE;
                     return;
                 }
-                else if (result.Equals("Local"))
+                else if (result.Equals("Local\n"))
                 {
                     instrumentsState.CS9010State = EnumInstrumentState.INIT;
                 }
-                else if (result.Equals("Address")) {
+                else if (result.Equals("Address\n")) {
                     instrumentsState.CS9010State = EnumInstrumentState.SADD;
                 }
             }
@@ -1047,10 +1047,33 @@ namespace AutoCalibrationSystem
             {
                 //处理查询到的数据
                 string[] datas = result.Split(':');
-                datas = datas[1].Split('k');
+                //去掉后面的单位
+                switch (caliProcess.curMode) { 
+                    case EnumMode.IACI:
+                    case EnumMode.IDC:
+                    case EnumMode.IACF:
+                        datas = datas[1].Split('m');
+                        break;
+                    default:
+                        datas = datas[1].Split('k');
+                        break;
+                }
                 float data = float.Parse(datas[0]);
-                //保存到caliData
-                SaveTestToCaliData(data,caliProcess);
+                //读取为0时，不保存
+                if (data < 0.000001f && data > -0.000001f)
+                {
+                    return;
+                }
+                else
+                {
+                    if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
+                    {
+                        //保存到caliData
+                        SaveTestToCaliData(data, caliProcess);
+                        Console.WriteLine(stateFluke5520A.ToString());
+                    }
+                }
+
             }
         }
         //待校准表CS9010保存测量值
@@ -1069,17 +1092,9 @@ namespace AutoCalibrationSystem
                     caliData.vacfData[thisCaliProcess.curNum].TestOut = data;
                     break;
                 case EnumMode.VACVL:
-                    if (stateCS9920A != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vacvData[thisCaliProcess.curNum].TestOut = data;
                     break;
                 case EnumMode.VACVH:
-                    if (stateCS9920A != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vacvData[CaliData.VLOWNUM + thisCaliProcess.curNum].TestOut = data;
                     break;
                 case EnumMode.VDCL:
@@ -1093,17 +1108,9 @@ namespace AutoCalibrationSystem
                     }
                     break;
                 case EnumMode.VDCHP:
-                    if (stateCS9920B != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vdcData[CaliData.VLOWNUM + thisCaliProcess.curNum].TestOut = data;                   
                     break;
                 case EnumMode.VDCHN:
-                    if (stateCS9920B != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vdcData[CaliData.VDCPNUM + CaliData.VLOWNUM + thisCaliProcess.curNum].TestOut = data;
                     break;
             }
@@ -1148,6 +1155,10 @@ namespace AutoCalibrationSystem
             }
             else {
                 //发送查询指令
+                if ( !(stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE) )
+                {
+                    return;
+                }
                 //判断是否需要切换模式
                 if(caliProcess.changeMode && !caliProcess.changeMode9010){
                     switch(caliProcess.curMode)
@@ -1157,6 +1168,11 @@ namespace AutoCalibrationSystem
                             break;
                         case EnumMode.IACF:
                             command += CommandCS9010.Configure[(int)CommandCS9010.cmdConfigure.IAC];                            
+                            command += "#";
+                            comTest.Write(command);
+                            Console.WriteLine("发送到CS9010:" + command);                            
+                            //切换档位为30mA档
+                            command += CommandCS9010.Configure[(int)CommandCS9010.cmdConfigure.STALL4];                                                       
                             break;
                         case EnumMode.IDC:
                             command += CommandCS9010.Configure[(int)CommandCS9010.cmdConfigure.IDC];                               
@@ -1174,7 +1190,7 @@ namespace AutoCalibrationSystem
                     }
                     command += "#";
                     comTest.Write(command);
-                    Console.WriteLine("发送到cs9010:" + command);
+                    Console.WriteLine("发送到CS9010:" + command);
                     caliProcess.changeMode9010 = true;
                     return;
                 }
@@ -1187,7 +1203,8 @@ namespace AutoCalibrationSystem
                     }
                     if (caliProcess.curMode == EnumMode.IACF || caliProcess.curMode == EnumMode.VACF)
                     {
-                        command += CommandCS9010.Measure[(int)CommandCS9010.cmdMeasure.FREQ];
+                        //command += CommandCS9010.Measure[(int)CommandCS9010.cmdMeasure.FREQ];
+                        command += CommandCS9010.Measure[(int)CommandCS9010.cmdMeasure.VALUE];
                     }
                     else {
                         command += CommandCS9010.Measure[(int)CommandCS9010.cmdMeasure.VALUE];
@@ -1267,8 +1284,12 @@ namespace AutoCalibrationSystem
                     int sign = strs[0].StartsWith("+") == true ? 1 : -1;
                     float digit = float.Parse(strs[0]);
                     int exponent = int.Parse(strs[1]);
-                    float data = digit * (float)Math.Pow(10, exponent)/1000;
-                    SaveStandToCaliData(data, caliProcess);
+                    float data = digit * (float)Math.Pow(10, exponent);
+                    if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
+                    {
+                        //保存到caliData
+                        SaveStandToCaliData(data, caliProcess);
+                    }
                     if (sendcount34410A > 0)
                     {
                         sendcount34410A--;
@@ -1300,17 +1321,9 @@ namespace AutoCalibrationSystem
                     caliData.vacfData[thisCaliProcess.curNum].StandOut = data;
                     break;
                 case EnumMode.VACVL:
-                    if (stateCS9920A != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vacvData[thisCaliProcess.curNum].StandOut = data;
                     break;
                 case EnumMode.VACVH:
-                    if (stateCS9920A != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
                     caliData.vacvData[CaliData.VLOWNUM + thisCaliProcess.curNum].StandOut = data;
                     break;
                 case EnumMode.VDCL:
@@ -1323,18 +1336,10 @@ namespace AutoCalibrationSystem
                         caliData.vdcData[CaliData.VDCPNUM + thisCaliProcess.curNum - CaliData.VLOWNUM].StandOut = data;
                     }
                     break;
-                case EnumMode.VDCHP:
-                    if (stateCS9920B != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
+                case EnumMode.VDCHP:                    
                     caliData.vdcData[CaliData.VLOWNUM + thisCaliProcess.curNum].StandOut = data;
                     break;
-                case EnumMode.VDCHN:
-                    if (stateCS9920B != StateCS9920.OUT_STABLE)
-                    {
-                        return;
-                    }
+                case EnumMode.VDCHN:                   
                     caliData.vdcData[CaliData.VDCPNUM + CaliData.VLOWNUM + thisCaliProcess.curNum].StandOut = data;
                     break;
             }
@@ -1416,7 +1421,6 @@ namespace AutoCalibrationSystem
                 sendcount34410A++;
             }
             StandSendMessage(command+"\n");
-
             Console.WriteLine("发送到34410A:" + command);
         }
         //5520A定时函数
@@ -1434,6 +1438,8 @@ namespace AutoCalibrationSystem
             {
                 command += "REMOTE\r\n";
                 instrumentsState.Fluke5520AState = EnumInstrumentState.REMOTE;
+                com5520A.Write(command);
+                Console.WriteLine("发送到5520A:" + command);
             }
             else
             {
@@ -1442,27 +1448,40 @@ namespace AutoCalibrationSystem
                 {
                     if (caliProcess.curNum == caliProcess.curNumTest)
                     {
-                        //校准点更新为已校准
-                        this.gridViewModel.updateItem(caliData, caliProcess);
-                        //刷新列表
-                        dgvCaliItem.Invoke(showProcess, false);
-                        caliProcess.curTotalNum++;
-                        caliProcess.curNum++;
-                        //是否要切换模式
-                        caliProcess.getCurMode(caliData);
-                        dgvCaliItem.Invoke(showProcess, true);
-                        sendcount5520A--;
+                        if (stateFluke5520A == StateSource.OUT_STABLE)
+                        {
+                            //停止源输出
+                            command += "STBY";
+                            com5520A.Write(command + "\r\n");
+                            Console.WriteLine("发送到5520A:" + command);
+                            stateFluke5520A = StateSource.STOP;
+                            //校准点更新为已校准
+                            this.gridViewModel.updateItem(caliData, caliProcess);
+                            //刷新列表
+                            dgvCaliItem.Invoke(showProcess, false);
+                            caliProcess.curTotalNum++;
+                            caliProcess.curNum++;
+                            //是否要切换模式
+                            caliProcess.getCurMode(caliData);
+                            dgvCaliItem.Invoke(showProcess, true);
+                            if (caliProcess.complete == EnumCaliState.COMPLETE)
+                                caliState = EnumCaliState.COMPLETE;
+                            return;
+                        }
                     }
-                }
-                if (sendcount5520A == 0)
+                }                
+                if (stateFluke5520A == StateSource.STOP)
                 {
                     command += this.caliProcess.getFlukeSourceString(caliData);
-                    com5520A.Write(command);
-                    Console.WriteLine("发送到5520A:" + command);
-                    sendcount5520A++;
+                    stateFluke5520A = StateSource.OUT_START;
+                    com5520A.Write(command + "\r\n");
+                    Console.WriteLine("发送到5520A:" + command);                   
+                }
+                else if (stateFluke5520A == StateSource.OUT_START)
+                {
+                    stateFluke5520A = StateSource.OUT_STABLE;
                 }
             }
-
         }
         //Fluke5520A的串口接收函数        
         private void com5520A_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -1501,7 +1520,7 @@ namespace AutoCalibrationSystem
                 {
                     if (caliProcess.curNum == caliProcess.curNumTest)
                     {
-                        if(stateCS9920B == StateCS9920.OUT_STABLE)
+                        if(stateCS9920B == StateSource.OUT_STABLE)
                         {
                             //校准点更新为已校准
                             this.gridViewModel.updateItem(caliData, caliProcess);
@@ -1514,32 +1533,34 @@ namespace AutoCalibrationSystem
                             dgvCaliItem.Invoke(showProcess, true);
                             //停止源输出
                             command += CommandCS9920.SourceControl[(int)CommandCS9920.cmdSourceControl.STOP];
-                            stateCS9920B = StateCS9920.STOP;
+                            stateCS9920B = StateSource.STOP;
                             command += "#";//结束符
                             com9920B.Write(command);
                             //已发送命令数加1
                             sendcount9920B++;
                             Console.WriteLine("发送到CS9920B:" + command);
+                            if (caliProcess.complete == EnumCaliState.COMPLETE)
+                                caliState = EnumCaliState.COMPLETE;
                             return;
                         }
                     }
                 }
                 //先设置电压
-                if (stateCS9920B == StateCS9920.STOP)
+                if (stateCS9920B == StateSource.STOP)
                 {
                     command += CommandCS9920.SetVoltage[(int)CommandCS9920.cmdSetVoltage.DC];
                     command += this.caliProcess.getCS9920SourceString(caliData, "CS9920B");
-                    stateCS9920B = StateCS9920.SET_VALUE;
+                    stateCS9920B = StateSource.SET_VALUE;
                 }
                 //再开始输出电压
-                else if (stateCS9920B == StateCS9920.SET_VALUE)
+                else if (stateCS9920B == StateSource.SET_VALUE)
                 {
                     command += CommandCS9920.SourceControl[(int)CommandCS9920.cmdSourceControl.STAR];
-                    stateCS9920B = StateCS9920.OUT_START;
+                    stateCS9920B = StateSource.OUT_START;
                 }
-                else if (stateCS9920B == StateCS9920.OUT_START)
+                else if (stateCS9920B == StateSource.OUT_START)
                 {
-                    stateCS9920B = StateCS9920.OUT_STABLE;
+                    stateCS9920B = StateSource.OUT_STABLE;
                 }
             }
             if (command.Equals(""))
@@ -1640,7 +1661,7 @@ namespace AutoCalibrationSystem
                 {
                     if (caliProcess.curNum == caliProcess.curNumTest)
                     {
-                        if (stateCS9920A == StateCS9920.OUT_STABLE)
+                        if (stateCS9920A == StateSource.OUT_STABLE)
                         {
                             //校准点更新为已校准
                             this.gridViewModel.updateItem(caliData, caliProcess);
@@ -1653,7 +1674,7 @@ namespace AutoCalibrationSystem
                             dgvCaliItem.Invoke(showProcess, true);
                             //停止源输出
                             command += CommandCS9920.SourceControl[(int)CommandCS9920.cmdSourceControl.STOP];
-                            stateCS9920A = StateCS9920.STOP;
+                            stateCS9920A = StateSource.STOP;
                             command += "#";//结束符
                             com9920A.Write(command);
                             //已发送命令数加1
@@ -1666,26 +1687,26 @@ namespace AutoCalibrationSystem
                     }
                 }
                 //先设置电压
-                if (stateCS9920A == StateCS9920.STOP)
+                if (stateCS9920A == StateSource.STOP)
                 {
                     command += CommandCS9920.SetVoltage[(int)CommandCS9920.cmdSetVoltage.AC];
                     command += this.caliProcess.getCS9920SourceString(caliData, "CS9920A");
-                    stateCS9920A = StateCS9920.SET_VALUE;
+                    stateCS9920A = StateSource.SET_VALUE;
                 }
                 //再设置时间
-                else if (stateCS9920A == StateCS9920.SET_VALUE)
+                else if (stateCS9920A == StateSource.SET_VALUE)
                 {
                     command += CommandCS9920.SetTime[(int)CommandCS9920.cmdSetTime.AC];
-                    stateCS9920A = StateCS9920.SET_TIME;
+                    stateCS9920A = StateSource.SET_TIME;
                 }
                 //再开始输出电压
-                else if (stateCS9920A == StateCS9920.SET_TIME)
+                else if (stateCS9920A == StateSource.SET_TIME)
                 {
                     command += CommandCS9920.SourceControl[(int)CommandCS9920.cmdSourceControl.STAR];
-                    stateCS9920A = StateCS9920.OUT_START;
+                    stateCS9920A = StateSource.OUT_START;
                 }
-                else if (stateCS9920A == StateCS9920.OUT_START) {
-                    stateCS9920A = StateCS9920.OUT_STABLE;
+                else if (stateCS9920A == StateSource.OUT_START) {
+                    stateCS9920A = StateSource.OUT_STABLE;
                 }
             }
             if (command.Equals(""))

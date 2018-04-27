@@ -219,8 +219,9 @@ namespace AutoCalibrationSystem
                 vacfData[i].Source = 50 + 100*i;
             }
             //iaci初始化
-            float[] temparray = { 800, 1600, 2400, 3200, 4000,
-                                  160,320,480,640,800,
+            float[] temparray = { 
+                                  80, 160, 24, 32, 40,
+                                  16,32,48,64,80,
                                   40,80,120,160,200,     
                                   8,16,24,32,40,
                                   1.810f,3.620f,5.4298f,7.2398f,9.0498f,

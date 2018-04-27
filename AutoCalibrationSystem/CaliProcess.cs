@@ -93,7 +93,7 @@ namespace AutoCalibrationSystem
         }
         public string getFlukeSourceString(CaliData caliData)
         {
-            string source = "STBY;";
+            string source = "OUT ";
             string temp = "";
             List<CaliItem> list = null;
             int offset = 0;
