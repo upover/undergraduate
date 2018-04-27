@@ -58,14 +58,14 @@ namespace AutoCalibrationSystem
                 CaliItem item = new CaliItem("VACF");
                 vacfData.Add(item);
             }
-            idcData = new List<CaliItem>(80);
-            for (int i = 0; i < 80; i++)
+            idcData = new List<CaliItem>(60);
+            for (int i = 0; i < 60; i++)
             {
                 CaliItem item = new CaliItem("IDC");
                 idcData.Add(item);
             }
-            iaciData = new List<CaliItem>(40);
-            for (int i = 0; i < 40; i++)
+            iaciData = new List<CaliItem>(30);
+            for (int i = 0; i < 30; i++)
             {
                 CaliItem item = new CaliItem("IACI");
                 iaciData.Add(item);
@@ -220,8 +220,6 @@ namespace AutoCalibrationSystem
             }
             //iaci初始化
             float[] temparray = { 
-                                  80, 160, 24, 32, 40,
-                                  16,32,48,64,80,
                                   40,80,120,160,200,     
                                   8,16,24,32,40,
                                   1.810f,3.620f,5.4298f,7.2398f,9.0498f,

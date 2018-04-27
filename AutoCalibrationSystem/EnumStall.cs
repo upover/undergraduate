@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace AutoCalibrationSystem
 {
-    public enum EnumInstrumentState
+    public enum EnumStall
     {
-        INIT, 
-        SADD, 
-        REMOTE, 
-        LOCAL, 
-        QUERYREMOTE,
-        MODEABLE,
-        STALLABLE
+        STALL_NO,
+        STALL_1,
+        STALL_2,
+        STALL_3,
+        STALL_4,
+        STALL_5,
+        STALL_6,
     }
 }

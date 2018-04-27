@@ -82,3 +82,4 @@ E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\Au
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache

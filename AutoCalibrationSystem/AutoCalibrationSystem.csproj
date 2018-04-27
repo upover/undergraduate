@@ -68,6 +68,7 @@
     <Compile Include="EnumCaliState.cs" />
     <Compile Include="EnumInstrumentState.cs" />
     <Compile Include="EnumMode.cs" />
+    <Compile Include="EnumStall.cs" />
     <Compile Include="InstrumentState.cs" />
     <Compile Include="GridViewModel.cs" />
     <Compile Include="MainForm.cs">

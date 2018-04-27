@@ -703,7 +703,8 @@ namespace AutoCalibrationSystem
 
         }
         //上下页翻页时，显示当前校准项
-        private void SetCaliItemRatioButton(EnumMode mode) {
+        private void SetCaliItemRatioButton(EnumMode mode) 
+        {            
             switch (mode) { 
                 case EnumMode.IACI:
                     this.rbIACI.Checked = true;
@@ -1142,25 +1143,16 @@ namespace AutoCalibrationSystem
             {
                 //远控
                 command += CommandCS9010.Communication[(int)CommandCS9010.cmdCommunication.REMOTE];               
-                //command += "#";
-                //comTest.Write(command);
-                //远控指令发送后,高压表没有返回，需要询问一次状态
-                //instrumentsState.CS9010State = EnumInstrumentState.QUERYREMOTE;
-                //return;
             }
             else if (instrumentsState.CS9010State == EnumInstrumentState.QUERYREMOTE)
             {
                 //询问是否已远控
                 command += CommandCS9010.Communication[(int)CommandCS9010.cmdCommunication.QUERY];
             }
-            else {
-                //发送查询指令
-                if ( !(stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE) )
-                {
-                    return;
-                }
+            else {               
                 //判断是否需要切换模式
-                if(caliProcess.changeMode && !caliProcess.changeMode9010){
+                if(caliProcess.changeMode && !caliProcess.changeMode9010)
+                {
                     switch(caliProcess.curMode)
                     {
                         case EnumMode.IACI:
@@ -1198,6 +1190,11 @@ namespace AutoCalibrationSystem
                 {
                     //该模式校准完毕
                     if( caliProcess.curNumTest == caliProcess.curModeTotal - 1 )
+                    {
+                        return;
+                    }
+                    //发送查询指令时，判断是否源已经稳定
+                    if (!(stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE))
                     {
                         return;
                     }

@@ -318,7 +318,8 @@
             this.rbVDCL.TabStop = true;
             this.rbVDCL.Text = "VDC Low";
             this.rbVDCL.UseVisualStyleBackColor = true;
-            this.rbVDCL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbVDCL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVDCL.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVDCHP
             // 
@@ -330,7 +331,8 @@
             this.rbVDCHP.TabStop = true;
             this.rbVDCHP.Text = "VDC H Pos";
             this.rbVDCHP.UseVisualStyleBackColor = true;
-            this.rbVDCHP.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbVDCHP.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVDCHP.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACVL
             // 
@@ -342,7 +344,8 @@
             this.rbVACVL.TabStop = true;
             this.rbVACVL.Text = "VAC V Low";
             this.rbVACVL.UseVisualStyleBackColor = true;
-            this.rbVACVL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+ //           this.rbVACVL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVACVL.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACVH
             // 
@@ -354,7 +357,8 @@
             this.rbVACVH.TabStop = true;
             this.rbVACVH.Text = "VAC V High";
             this.rbVACVH.UseVisualStyleBackColor = true;
-            this.rbVACVH.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbVACVH.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVACVH.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACF
             // 
@@ -366,7 +370,8 @@
             this.rbVACF.TabStop = true;
             this.rbVACF.Text = "VAC F";
             this.rbVACF.UseVisualStyleBackColor = true;
-            this.rbVACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbVACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVACF.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIDC
             // 
@@ -378,7 +383,8 @@
             this.rbIDC.TabStop = true;
             this.rbIDC.Text = "IDC";
             this.rbIDC.UseVisualStyleBackColor = true;
-            this.rbIDC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbIDC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbIDC.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIACI
             // 
@@ -390,7 +396,8 @@
             this.rbIACI.TabStop = true;
             this.rbIACI.Text = "IAC I";
             this.rbIACI.UseVisualStyleBackColor = true;
-            this.rbIACI.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbIACI.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbIACI.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIACF
             // 
@@ -402,7 +409,8 @@
             this.rbIACF.TabStop = true;
             this.rbIACF.Text = "IAC F";
             this.rbIACF.UseVisualStyleBackColor = true;
-            this.rbIACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbIACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbIACF.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbUnitSmall
             // 
@@ -454,7 +462,8 @@
             this.rbVDCHN.TabStop = true;
             this.rbVDCHN.Text = "VDC H Neg";
             this.rbVDCHN.UseVisualStyleBackColor = true;
-            this.rbVDCHN.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+//            this.rbVDCHN.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            this.rbVDCHN.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // groupBox2
             // 

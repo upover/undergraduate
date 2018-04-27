@@ -8,7 +8,6 @@ namespace AutoCalibrationSystem
 {
     public class CaliProcess
     {
-
         //校准序号
         public EnumMode curMode;        //当前校准模式
         public EnumMode initiMode;      //初始校准模式
@@ -22,6 +21,7 @@ namespace AutoCalibrationSystem
         public bool changeMode;
         public bool changeMode9010;
         public bool type;              //校准方式：true连续，false当前
+        public EnumStall stall;
         public CaliProcess() {
            
         }
@@ -201,6 +201,9 @@ namespace AutoCalibrationSystem
         }
         public void getCurMode(CaliData caliData)
         {
+            changeMode = false;
+            this.stall = EnumStall.STALL_NO;
+            //判断当前模式是否校准完成
             if (curNum == curModeTotal)
             {
                 if (type == false)
@@ -214,9 +217,11 @@ namespace AutoCalibrationSystem
                 changeMode = true;
                 changeMode9010 = false;
                 //进入到下一模式
-                switch (curMode) { 
+                switch (curMode)
+                {
                     case EnumMode.IACI:
                         curMode = EnumMode.IACF;
+                        this.stall = EnumStall.STALL_4;//频响校准时需要切换档位
                         curModeTotal = caliData.iacfData.Count;
                         break;
                     case EnumMode.IACF:
@@ -233,7 +238,7 @@ namespace AutoCalibrationSystem
                         break;
                     case EnumMode.VACVL:
                         curMode = EnumMode.VDCL;
-                        curModeTotal = CaliData.VLOWNUM*2;
+                        curModeTotal = CaliData.VLOWNUM * 2;
                         break;
                     case EnumMode.VDCL:
                         curMode = EnumMode.VACVH;
@@ -252,8 +257,44 @@ namespace AutoCalibrationSystem
                         break;
                 }
             }
-            else
-                changeMode = false;
+            //电流模式需要切换档位
+            if (curMode == EnumMode.IACI || curMode == EnumMode.IDC) 
+            {
+                //每5个点切换一次档位
+                if (curNum % 5 == 0) 
+                {
+                    changeMode = true;
+                    changeMode9010 = false;
+                    int tempStall = curNum / 5;
+                    switch (tempStall)
+                    {
+                        case 0:
+                        case 6:
+                            this.stall = EnumStall.STALL_6;
+                            break;
+                        case 1:
+                        case 7:
+                            this.stall = EnumStall.STALL_5;
+                            break;
+                        case 2:
+                        case 8:
+                            this.stall = EnumStall.STALL_4;
+                            break;
+                        case 3:
+                        case 9:
+                            this.stall = EnumStall.STALL_3;
+                            break;
+                        case 4:
+                        case 10:
+                            this.stall = EnumStall.STALL_2;
+                            break;
+                        case 5:
+                        case 11:
+                            this.stall = EnumStall.STALL_1;
+                            break;
+                    }                    
+                }
+            }        
         }
     }
 }
