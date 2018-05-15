@@ -65,6 +65,7 @@ namespace AutoCalibrationSystem
         }
 
         //返回串口号
+        //待校表
         public string boxComTestValue {
             get {
                 return this.boxComTest.SelectedItem.ToString();
@@ -73,6 +74,7 @@ namespace AutoCalibrationSystem
                 this.boxComTest.Text = value;
             }
         }
+        //标准表1
         public string boxComStandValue
         {
             get
@@ -84,6 +86,19 @@ namespace AutoCalibrationSystem
                 this.boxComStand.Text = value;
             }
         }
+        //标准表2
+        public string boxComStand2Value
+        {
+            get
+            {
+                return this.boxComStand2.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxComStand2.Text = value;
+            }
+        }
+        //5520A
         public string boxCom5520AValue
         {
             get
@@ -95,6 +110,7 @@ namespace AutoCalibrationSystem
                 this.boxCom5520A.Text = value;
             }
         }
+        //9920A
         public string boxCom9920AValue
         {
             get
@@ -106,6 +122,7 @@ namespace AutoCalibrationSystem
                 this.boxCom9920A.Text = value;
             }
         }
+        //9920B
         public string boxCom9920BValue
         {
             get
@@ -117,7 +134,32 @@ namespace AutoCalibrationSystem
                 this.boxCom9920B.Text = value;
             }
         }
+        //TandH
+        public string boxComTandHValue
+        {
+            get
+            {
+                return this.boxComTandH.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxComTandH.Text = value;
+            }
+        }
+        //Relay
+        public string boxComRelayValue
+        {
+            get
+            {
+                return this.boxComRelay.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxComRelay.Text = value;
+            }
+        }
         //返回波特率
+        //待校准表
         public string boxBaudrateTestValue
         {
             get
@@ -129,6 +171,7 @@ namespace AutoCalibrationSystem
                 this.boxBaudrateTest.Text = value;
             }
         }
+        //标准表
         public string boxBaudrateStandValue
         {
             get
@@ -140,6 +183,19 @@ namespace AutoCalibrationSystem
                 this.boxBaudrateStand.Text = value;
             }
         }
+        //标准表2
+        public string boxBaudrateStand2Value
+        {
+            get
+            {
+                return this.boxBaudrateStand2.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxBaudrateStand2.Text = value;
+            }
+        }
+        //5520A
         public string boxBaudrate5520AValue
         {
             get
@@ -151,6 +207,7 @@ namespace AutoCalibrationSystem
                 this.boxBaudrate5520A.Text = value;
             }
         }
+        //9920A
         public string boxBaudrate9920AValue
         {
             get
@@ -162,6 +219,7 @@ namespace AutoCalibrationSystem
                 this.boxBaudrate9920A.Text = value;
             }
         }
+        //9920B
         public string boxBaudrate9920BValue
         {
             get
@@ -173,7 +231,31 @@ namespace AutoCalibrationSystem
                 this.boxBaudrate9920B.Text = value;
             }
         }
-        //返回网口号
+        //TandH
+        public string boxBaudrateTandHValue
+        {
+            get
+            {
+                return this.boxBaudrateTandH.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxBaudrateTandH.Text = value;
+            }
+        }
+        //Relay
+        public string boxBaudrateRelayValue
+        {
+            get
+            {
+                return this.boxBaudrateRelay.SelectedItem.ToString();
+            }
+            set
+            {
+                this.boxBaudrateRelay.Text = value;
+            }
+        }
+        //返回网口IP
         public string TextIPStandValue
         {
             get
@@ -185,7 +267,18 @@ namespace AutoCalibrationSystem
                 this.textIPStand.Text = value;
             }
         }
-        //返回端口号
+        public string TextIPStand2Value
+        {
+            get
+            {
+                return this.textIPStand2.Text.Trim().ToString();
+            }
+            set
+            {
+                this.textIPStand2.Text = value;
+            }
+        }
+        //返回网口端口号
         public string TextPortStandValue
         {
             get
@@ -197,6 +290,17 @@ namespace AutoCalibrationSystem
                 this.textPortStand.Text = value;
             }
         }
+        public string TextPortStand2Value
+        {
+            get
+            {
+                return this.textPortStand2.Text.Trim().ToString();
+            }
+            set
+            {
+                this.textPortStand2.Text = value;
+            }
+        }
         public ComSetForm()
         {
             InitializeComponent();
@@ -205,9 +309,12 @@ namespace AutoCalibrationSystem
         {
             this.boxComTest.Items.Clear();
             this.boxComStand.Items.Clear();
+            this.boxComStand2.Items.Clear();
             this.boxCom5520A.Items.Clear();
             this.boxCom9920A.Items.Clear();
             this.boxCom9920B.Items.Clear();
+            this.boxComTandH.Items.Clear();
+            this.boxComRelay.Items.Clear();
             string[] str = SerialPort.GetPortNames();
             if (str != null)
             {
@@ -215,24 +322,29 @@ namespace AutoCalibrationSystem
                 {
                     this.boxComTest.Items.Add(s);
                     this.boxComStand.Items.Add(s);
+                    this.boxComStand2.Items.Add(s);
                     this.boxCom5520A.Items.Add(s);
                     this.boxCom9920A.Items.Add(s);
                     this.boxCom9920B.Items.Add(s);
+                    this.boxComTandH.Items.Add(s);
+                    this.boxComRelay.Items.Add(s);
                 }
                 this.boxComTest.SelectedIndex = 0;
                 this.boxComStand.SelectedIndex = 0;
+                this.boxComStand2.SelectedIndex = 0;
                 this.boxCom5520A.SelectedIndex = 0;
                 this.boxCom9920A.SelectedIndex = 0;
                 this.boxCom9920B.SelectedIndex = 0;
             }
             this.boxBaudrateTest.SelectedIndex = 1;
             this.boxBaudrateStand.SelectedIndex = 1;
+            this.boxBaudrateStand2.SelectedIndex = 1;
             this.boxBaudrate5520A.SelectedIndex = 1;
             this.boxBaudrate9920B.SelectedIndex = 1;
             this.boxBaudrate9920A.SelectedIndex = 1;
+            this.boxBaudrateTandH.SelectedIndex = 1;
+            this.boxBaudrateRelay.SelectedIndex = 1;
         }
- 
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -286,6 +398,31 @@ namespace AutoCalibrationSystem
                     }
                 }
              }
+        }
+        //打开串口按钮标准表2
+        private void btnComStand2_Click(object sender, EventArgs e)
+        {
+            utilEventArgs.Parmater = "comStand2";
+            if (btnComStand2.Text == "打开串口")
+            {
+                if (comOpenHandler != null)
+                {
+                    if (comOpenHandler(this, utilEventArgs))
+                    {
+                        btnComStand2.Text = "关闭串口";
+                    }
+                }
+            }
+            else if (btnComStand2.Text == "关闭串口")
+            {
+                if (comCloseHandler != null)
+                {
+                    if (comCloseHandler(this, utilEventArgs))
+                    {
+                        btnComStand2.Text = "打开串口";
+                    }
+                }
+            }
         }
         //打开串口按钮5520A
         private void btnCom5520A_Click(object sender, EventArgs e)
@@ -367,9 +504,63 @@ namespace AutoCalibrationSystem
 
             }
         }
+        //打开串口温湿度模块
+        private void btnTandH_Click(object sender, EventArgs e)
+        {
+            utilEventArgs.Parmater = "comTandH";
+            if (btnComTandH.Text == "打开串口")
+            {
+                if (comOpenHandler != null)
+                {
+                    if (comOpenHandler(this, utilEventArgs))
+                    {
+                        btnComTandH.Text = "关闭串口";
+                    }
+                }
+
+            }
+            else if (btnComTandH.Text == "关闭串口")
+            {
+                if (comCloseHandler != null)
+                {
+                    if (comCloseHandler(this, utilEventArgs))
+                    {
+                        btnComTandH.Text = "打开串口";
+                    }
+                }
+
+            }
+        }
+        //打开串口继电器模块
+        private void btnComRelay_Click(object sender, EventArgs e)
+        {
+            utilEventArgs.Parmater = "comRelay";
+            if (btnComRelay.Text == "打开串口")
+            {
+                if (comOpenHandler != null)
+                {
+                    if (comOpenHandler(this, utilEventArgs))
+                    {
+                        btnComRelay.Text = "关闭串口";
+                    }
+                }
+
+            }
+            else if (btnComTandH.Text == "关闭串口")
+            {
+                if (comCloseHandler != null)
+                {
+                    if (comCloseHandler(this, utilEventArgs))
+                    {
+                        btnComRelay.Text = "打开串口";
+                    }
+                }
+            }
+        }
         //网口
         private void btnLanStand_Click(object sender, EventArgs e)
         {
+            utilEventArgs.Parmater = "lanStand1";
             if (btnLanStand.Text == "打开网口")
             {
                 if (lanOpenHandler != null)
@@ -391,5 +582,30 @@ namespace AutoCalibrationSystem
                 }
             }
         }
+
+        private void btnLanStand2_Click(object sender, EventArgs e)
+        {
+            utilEventArgs.Parmater = "lanStand2";
+            if (btnLanStand2.Text == "打开网口")
+            {
+                if (lanOpenHandler != null)
+                {
+                    if (lanOpenHandler(this, utilEventArgs))
+                    {
+                        btnLanStand2.Text = "关闭网口";
+                    }
+                }
+            }
+            else if (btnLanStand2.Text == "关闭网口")
+            {
+                if (lanCloseHandler != null)
+                {
+                    if (lanCloseHandler(this, utilEventArgs))
+                    {
+                        btnLanStand2.Text = "打开网口";
+                    }
+                }
+            }
+        }    
     }
 }

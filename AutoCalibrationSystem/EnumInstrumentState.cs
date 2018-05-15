@@ -14,6 +14,8 @@ namespace AutoCalibrationSystem
         LOCAL, 
         QUERYREMOTE,
         MODEABLE,
-        STALLABLE
+        STALLABLE,
+        READCALIDATA,
+        SENDCALIDATA,
     }
 }

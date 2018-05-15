@@ -35,6 +35,10 @@
     <Reference Include="DMSkin">
       <HintPath>..\DMSkin.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaliData.cs" />
+    <Compile Include="DataAccess\DAO.cs" />
+    <Compile Include="DataAccess\DataBase.cs" />
+    <Compile Include="DividerProcess.cs" />
+    <Compile Include="DividerItem.cs" />
     <Compile Include="CaliItem.cs" />
     <Compile Include="CaliItemSetForm.cs">
       <SubType>Form</SubType>
@@ -65,10 +73,13 @@
     <Compile Include="ComSetForm.Designer.cs">
       <DependentUpon>ComSetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DividerData.cs" />
+    <Compile Include="EnumInstrumentType.cs" />
     <Compile Include="EnumCaliState.cs" />
     <Compile Include="EnumInstrumentState.cs" />
     <Compile Include="EnumMode.cs" />
     <Compile Include="EnumStall.cs" />
+    <Compile Include="DividerGridViewModel.cs" />
     <Compile Include="InstrumentState.cs" />
     <Compile Include="GridViewModel.cs" />
     <Compile Include="MainForm.cs">
@@ -91,6 +102,7 @@
     <Compile Include="ResultManageForm.Designer.cs">
       <DependentUpon>ResultManageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools.cs" />
     <Compile Include="UtilEventArgs.cs" />
     <EmbeddedResource Include="CaliItemSetForm.resx">
       <DependentUpon>CaliItemSetForm.cs</DependentUpon>
@@ -130,6 +142,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DMSkin.dll" />
     <Content Include="res\CS.ICO" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

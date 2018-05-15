@@ -18,10 +18,11 @@ namespace AutoCalibrationSystem
         public EnumCaliState complete;  //校准状态
         public int curTotalNum;         //当前已校准的总点数
         public int totalNum;            //需要校准的总点数 
-        public bool changeMode;
-        public bool changeMode9010;
-        public bool type;              //校准方式：true连续，false当前
-        public EnumStall stall;
+        public bool changeMode;         //是否需要切换模式
+        public bool changeMode9010;     //9010是否已切换模式
+        public bool type;               //校准方式：true连续，false当前
+        public EnumStall stall;         //切换电流档位时档位值
+        public float curSource;         //当前校准掉的输入源
         public CaliProcess() {
            
         }
@@ -113,7 +114,7 @@ namespace AutoCalibrationSystem
                     break;
                 case EnumMode.VACF:
                     list = caliData.vacfData;
-                    temp += "KV,1KV";
+                    temp += "HZ,1KV";
                     break;
                 case EnumMode.VACVL:
                     list = caliData.vacvData;
@@ -145,59 +146,55 @@ namespace AutoCalibrationSystem
                 //负向电压低压部分
                 if (curNum >= CaliData.VLOWNUM)
                 {
-                    source += list.ElementAt(offset + curNum - CaliData.VLOWNUM).Source.ToString();
+                    this.curSource = list.ElementAt(offset + curNum - CaliData.VLOWNUM).Source;
                 }
                 else
-                    source += list.ElementAt(curNum).Source.ToString();
+                    this.curSource = list.ElementAt(curNum).Source;
             }
             else
             {
-                source += list.ElementAt(curNum).Source.ToString();
+                this.curSource = list.ElementAt(curNum).Source;
             }
-            source += temp+";OPER";
+            source += this.curSource.ToString() + temp+";OPER";           
             return source;
         }
         public string getCS9920SourceString(CaliData caliData,String type)
         {
-            string source = null;
             List<CaliItem> list = null;
             switch(type)
             {
                 //直流高压
                 case "CS9920B":
                     list = caliData.vdcData;
-
                     if(this.curMode == EnumMode.VDCHP)
-                        source = list.ElementAt(this.curNum + CaliData.VLOWNUM).Source.ToString();
+                        this.curSource = list.ElementAt(this.curNum + CaliData.VLOWNUM).Source;
                     else if (this.curMode == EnumMode.VDCHN)
-                        source = list.ElementAt(this.curNum + CaliData.VLOWNUM + CaliData.VDCPNUM).Source.ToString();
+                        this.curSource = list.ElementAt(this.curNum + CaliData.VLOWNUM + CaliData.VDCPNUM).Source;
                     else if (this.curMode == EnumMode.VDCL)
                     {
                         if (this.curNum < CaliData.VLOWNUM)
                         {
-                            source = list.ElementAt(this.curNum).Source.ToString();
+                            this.curSource = list.ElementAt(this.curNum).Source;
                         }
                         else
                         {
                             //输出转为正，负电压时换方向实现
-                            source = (-1*list.ElementAt(CaliData.VDCPNUM + this.curNum - CaliData.VLOWNUM).Source).ToString(); 
+                            this.curSource = (-1 * list.ElementAt(CaliData.VDCPNUM + this.curNum - CaliData.VLOWNUM).Source); 
                         }
-
                     }
                     break;
                 //交流高压
                 case "CS9920A":
-
                     list = caliData.vacvData;
-                    if (this.curMode == EnumMode.VDCHP)
+                    if (this.curMode == EnumMode.VACVH)
                     {
-                        source = list.ElementAt(this.curNum + CaliData.VLOWNUM).Source.ToString(); 
+                        this.curSource = list.ElementAt(this.curNum + CaliData.VLOWNUM).Source; 
                     }
                     else if (this.curMode == EnumMode.VACVL)
-                        source = list.ElementAt(this.curNum).Source.ToString();                                                  
+                        this.curSource = list.ElementAt(this.curNum).Source;                                                  
                     break;
             }
-            return source;
+            return this.curSource.ToString();
         }
         public void getCurMode(CaliData caliData)
         {

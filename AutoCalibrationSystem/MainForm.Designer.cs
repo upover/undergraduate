@@ -30,8 +30,10 @@
         {
             System.Windows.Forms.Button btnDeleteAllPoint;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btLoginout = new System.Windows.Forms.Button();
             this.btncomset = new System.Windows.Forms.Button();
             this.btnresult = new System.Windows.Forms.Button();
@@ -46,7 +48,6 @@
             this.TestOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddPoint = new System.Windows.Forms.Button();
-            this.btnInsertPoint = new System.Windows.Forms.Button();
             this.btnDeletePoint = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
@@ -76,23 +77,73 @@
             this.rbTypeAll = new System.Windows.Forms.RadioButton();
             this.rbTypeCur = new System.Windows.Forms.RadioButton();
             this.btnsendcali = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnanalyze = new System.Windows.Forms.Button();
             this.progressBarCali = new System.Windows.Forms.ProgressBar();
             this.btnpausecali = new System.Windows.Forms.Button();
             this.labelprogress = new System.Windows.Forms.Label();
             this.labelcompleted = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dmTabCtrl = new DMSkin.Controls.DMTabControl();
+            this.TabCalibrate = new System.Windows.Forms.TabPage();
+            this.btnReadCali = new System.Windows.Forms.Button();
+            this.TabEvaluate = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.rbMeasTypeCur = new System.Windows.Forms.RadioButton();
+            this.rbMeasTypeAll = new System.Windows.Forms.RadioButton();
+            this.btnDividerReset = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.rbCycleYes = new System.Windows.Forms.RadioButton();
+            this.rbCycleNo = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rbSmallUtilDivider = new System.Windows.Forms.RadioButton();
+            this.rbBigUtilDivider = new System.Windows.Forms.RadioButton();
+            this.labelTotalRecordDivider = new System.Windows.Forms.Label();
+            this.labelCurPageDivider = new System.Windows.Forms.Label();
+            this.btnnextpage_divider = new System.Windows.Forms.Button();
+            this.btnprepage_divider = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rbvac = new System.Windows.Forms.RadioButton();
+            this.rbvdcn = new System.Windows.Forms.RadioButton();
+            this.rbf = new System.Windows.Forms.RadioButton();
+            this.rbvdcp = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnDividerPause = new System.Windows.Forms.Button();
+            this.btnDividerCancel = new System.Windows.Forms.Button();
+            this.btnDividerStart = new System.Windows.Forms.Button();
+            this.btnSaveDivider = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rbSaveAuto = new System.Windows.Forms.RadioButton();
+            this.rbSaveMan = new System.Windows.Forms.RadioButton();
+            this.dgvDivider = new System.Windows.Forms.DataGridView();
+            this.ModeDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SourceDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FrequencyDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StandDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TestDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TemperatureDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HumidityDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StateDivider = new System.Windows.Forms.DataGridViewTextBoxColumn();
             btnDeleteAllPoint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCaliItem)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.dmTabCtrl.SuspendLayout();
+            this.TabCalibrate.SuspendLayout();
+            this.TabEvaluate.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDivider)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDeleteAllPoint
             // 
-            btnDeleteAllPoint.Location = new System.Drawing.Point(182, 509);
+            btnDeleteAllPoint.Location = new System.Drawing.Point(359, 454);
             btnDeleteAllPoint.Name = "btnDeleteAllPoint";
             btnDeleteAllPoint.Size = new System.Drawing.Size(75, 23);
             btnDeleteAllPoint.TabIndex = 96;
@@ -103,7 +154,7 @@
             // 
             this.btLoginout.Image = ((System.Drawing.Image)(resources.GetObject("btLoginout.Image")));
             this.btLoginout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btLoginout.Location = new System.Drawing.Point(1156, 620);
+            this.btLoginout.Location = new System.Drawing.Point(1156, 580);
             this.btLoginout.Name = "btLoginout";
             this.btLoginout.Size = new System.Drawing.Size(58, 23);
             this.btLoginout.TabIndex = 83;
@@ -153,7 +204,7 @@
             // 
             // btnstartcali
             // 
-            this.btnstartcali.Location = new System.Drawing.Point(12, 590);
+            this.btnstartcali.Location = new System.Drawing.Point(1, 497);
             this.btnstartcali.Name = "btnstartcali";
             this.btnstartcali.Size = new System.Drawing.Size(75, 23);
             this.btnstartcali.TabIndex = 88;
@@ -163,12 +214,13 @@
             // 
             // btnsavecali
             // 
-            this.btnsavecali.Location = new System.Drawing.Point(272, 590);
+            this.btnsavecali.Location = new System.Drawing.Point(261, 497);
             this.btnsavecali.Name = "btnsavecali";
             this.btnsavecali.Size = new System.Drawing.Size(75, 23);
             this.btnsavecali.TabIndex = 89;
             this.btnsavecali.Text = "保存结果";
             this.btnsavecali.UseVisualStyleBackColor = true;
+            this.btnsavecali.Click += new System.EventHandler(this.btnsavecali_Click);
             // 
             // dgvCaliItem
             // 
@@ -180,14 +232,14 @@
             this.dgvCaliItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCaliItem.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvCaliItem.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCaliItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCaliItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvCaliItem.ColumnHeadersHeight = 48;
             this.dgvCaliItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCaliItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -196,24 +248,24 @@
             this.StandOut,
             this.TestOut,
             this.State});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCaliItem.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCaliItem.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvCaliItem.EnableHeadersVisualStyles = false;
             this.dgvCaliItem.GridColor = System.Drawing.Color.Black;
-            this.dgvCaliItem.Location = new System.Drawing.Point(11, 98);
+            this.dgvCaliItem.Location = new System.Drawing.Point(2, 66);
             this.dgvCaliItem.MinimumSize = new System.Drawing.Size(0, 32);
             this.dgvCaliItem.Name = "dgvCaliItem";
             this.dgvCaliItem.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dgvCaliItem.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvCaliItem.RowTemplate.Height = 30;
             this.dgvCaliItem.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCaliItem.Size = new System.Drawing.Size(916, 370);
+            this.dgvCaliItem.Size = new System.Drawing.Size(959, 370);
             this.dgvCaliItem.StandardTab = true;
             this.dgvCaliItem.TabIndex = 92;
             this.dgvCaliItem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCaliItem_CellContentClick);
@@ -250,7 +302,7 @@
             // 
             // btnAddPoint
             // 
-            this.btnAddPoint.Location = new System.Drawing.Point(12, 480);
+            this.btnAddPoint.Location = new System.Drawing.Point(171, 454);
             this.btnAddPoint.Name = "btnAddPoint";
             this.btnAddPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPoint.TabIndex = 93;
@@ -258,19 +310,9 @@
             this.btnAddPoint.UseVisualStyleBackColor = true;
             this.btnAddPoint.Click += new System.EventHandler(this.btnAddPoint_Click);
             // 
-            // btnInsertPoint
-            // 
-            this.btnInsertPoint.Location = new System.Drawing.Point(11, 509);
-            this.btnInsertPoint.Name = "btnInsertPoint";
-            this.btnInsertPoint.Size = new System.Drawing.Size(75, 23);
-            this.btnInsertPoint.TabIndex = 94;
-            this.btnInsertPoint.Text = "插入点";
-            this.btnInsertPoint.UseVisualStyleBackColor = true;
-            this.btnInsertPoint.Click += new System.EventHandler(this.btnInsertPoint_Click);
-            // 
             // btnDeletePoint
             // 
-            this.btnDeletePoint.Location = new System.Drawing.Point(182, 480);
+            this.btnDeletePoint.Location = new System.Drawing.Point(261, 454);
             this.btnDeletePoint.Name = "btnDeletePoint";
             this.btnDeletePoint.Size = new System.Drawing.Size(75, 23);
             this.btnDeletePoint.TabIndex = 95;
@@ -280,7 +322,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(272, 480);
+            this.btnReset.Location = new System.Drawing.Point(451, 454);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 97;
@@ -290,7 +332,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(970, 183);
+            this.btnSend.Location = new System.Drawing.Point(1023, 183);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 98;
@@ -300,7 +342,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(970, 412);
+            this.btnClear.Location = new System.Drawing.Point(1023, 410);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 99;
@@ -318,7 +360,6 @@
             this.rbVDCL.TabStop = true;
             this.rbVDCL.Text = "VDC Low";
             this.rbVDCL.UseVisualStyleBackColor = true;
-//            this.rbVDCL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVDCL.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVDCHP
@@ -331,7 +372,6 @@
             this.rbVDCHP.TabStop = true;
             this.rbVDCHP.Text = "VDC H Pos";
             this.rbVDCHP.UseVisualStyleBackColor = true;
-//            this.rbVDCHP.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVDCHP.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACVL
@@ -344,7 +384,6 @@
             this.rbVACVL.TabStop = true;
             this.rbVACVL.Text = "VAC V Low";
             this.rbVACVL.UseVisualStyleBackColor = true;
- //           this.rbVACVL.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVACVL.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACVH
@@ -357,7 +396,6 @@
             this.rbVACVH.TabStop = true;
             this.rbVACVH.Text = "VAC V High";
             this.rbVACVH.UseVisualStyleBackColor = true;
-//            this.rbVACVH.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVACVH.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbVACF
@@ -370,7 +408,6 @@
             this.rbVACF.TabStop = true;
             this.rbVACF.Text = "VAC F";
             this.rbVACF.UseVisualStyleBackColor = true;
-//            this.rbVACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVACF.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIDC
@@ -383,7 +420,6 @@
             this.rbIDC.TabStop = true;
             this.rbIDC.Text = "IDC";
             this.rbIDC.UseVisualStyleBackColor = true;
-//            this.rbIDC.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbIDC.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIACI
@@ -396,7 +432,6 @@
             this.rbIACI.TabStop = true;
             this.rbIACI.Text = "IAC I";
             this.rbIACI.UseVisualStyleBackColor = true;
-//            this.rbIACI.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbIACI.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbIACF
@@ -409,7 +444,6 @@
             this.rbIACF.TabStop = true;
             this.rbIACF.Text = "IAC F";
             this.rbIACF.UseVisualStyleBackColor = true;
-//            this.rbIACF.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbIACF.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // rbUnitSmall
@@ -445,7 +479,7 @@
             this.groupBox1.Controls.Add(this.rbVACVH);
             this.groupBox1.Controls.Add(this.rbIDC);
             this.groupBox1.Controls.Add(this.rbVACF);
-            this.groupBox1.Location = new System.Drawing.Point(12, 41);
+            this.groupBox1.Location = new System.Drawing.Point(14, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(656, 51);
             this.groupBox1.TabIndex = 111;
@@ -462,14 +496,13 @@
             this.rbVDCHN.TabStop = true;
             this.rbVDCHN.Text = "VDC H Neg";
             this.rbVDCHN.UseVisualStyleBackColor = true;
-//            this.rbVDCHN.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             this.rbVDCHN.Click += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rbUnitSmall);
             this.groupBox2.Controls.Add(this.rbUnitBig);
-            this.groupBox2.Location = new System.Drawing.Point(681, 41);
+            this.groupBox2.Location = new System.Drawing.Point(713, 9);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(120, 51);
             this.groupBox2.TabIndex = 112;
@@ -478,24 +511,24 @@
             // 
             // textSend
             // 
-            this.textSend.Location = new System.Drawing.Point(970, 52);
+            this.textSend.Location = new System.Drawing.Point(1023, 52);
             this.textSend.Multiline = true;
             this.textSend.Name = "textSend";
-            this.textSend.Size = new System.Drawing.Size(244, 113);
+            this.textSend.Size = new System.Drawing.Size(191, 113);
             this.textSend.TabIndex = 113;
             // 
             // textReceive
             // 
-            this.textReceive.Location = new System.Drawing.Point(970, 216);
+            this.textReceive.Location = new System.Drawing.Point(1023, 216);
             this.textReceive.Multiline = true;
             this.textReceive.Name = "textReceive";
-            this.textReceive.Size = new System.Drawing.Size(244, 179);
+            this.textReceive.Size = new System.Drawing.Size(191, 179);
             this.textReceive.TabIndex = 114;
             this.textReceive.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // btnPrePage
             // 
-            this.btnPrePage.Location = new System.Drawing.Point(93, 480);
+            this.btnPrePage.Location = new System.Drawing.Point(1, 454);
             this.btnPrePage.Name = "btnPrePage";
             this.btnPrePage.Size = new System.Drawing.Size(75, 23);
             this.btnPrePage.TabIndex = 115;
@@ -505,7 +538,7 @@
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Location = new System.Drawing.Point(92, 509);
+            this.btnNextPage.Location = new System.Drawing.Point(88, 454);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(75, 23);
             this.btnNextPage.TabIndex = 116;
@@ -516,7 +549,7 @@
             // labelCurPage
             // 
             this.labelCurPage.AutoSize = true;
-            this.labelCurPage.Location = new System.Drawing.Point(730, 480);
+            this.labelCurPage.Location = new System.Drawing.Point(768, 454);
             this.labelCurPage.Name = "labelCurPage";
             this.labelCurPage.Size = new System.Drawing.Size(41, 12);
             this.labelCurPage.TabIndex = 117;
@@ -525,7 +558,7 @@
             // labelTotalRecord
             // 
             this.labelTotalRecord.AutoSize = true;
-            this.labelTotalRecord.Location = new System.Drawing.Point(839, 480);
+            this.labelTotalRecord.Location = new System.Drawing.Point(877, 454);
             this.labelTotalRecord.Name = "labelTotalRecord";
             this.labelTotalRecord.Size = new System.Drawing.Size(41, 12);
             this.labelTotalRecord.TabIndex = 118;
@@ -536,7 +569,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(738, 4);
+            this.label1.Location = new System.Drawing.Point(818, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 16);
             this.label1.TabIndex = 119;
@@ -544,7 +577,7 @@
             // 
             // btncancelcali
             // 
-            this.btncancelcali.Location = new System.Drawing.Point(182, 590);
+            this.btncancelcali.Location = new System.Drawing.Point(171, 497);
             this.btncancelcali.Name = "btncancelcali";
             this.btncancelcali.Size = new System.Drawing.Size(75, 23);
             this.btncancelcali.TabIndex = 120;
@@ -556,7 +589,7 @@
             // 
             this.groupBox3.Controls.Add(this.rbTypeAll);
             this.groupBox3.Controls.Add(this.rbTypeCur);
-            this.groupBox3.Location = new System.Drawing.Point(807, 41);
+            this.groupBox3.Location = new System.Drawing.Point(839, 9);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(120, 51);
             this.groupBox3.TabIndex = 121;
@@ -589,30 +622,13 @@
             // 
             // btnsendcali
             // 
-            this.btnsendcali.Location = new System.Drawing.Point(370, 590);
+            this.btnsendcali.Location = new System.Drawing.Point(359, 497);
             this.btnsendcali.Name = "btnsendcali";
             this.btnsendcali.Size = new System.Drawing.Size(75, 23);
             this.btnsendcali.TabIndex = 122;
             this.btnsendcali.Text = "下传结果";
             this.btnsendcali.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(467, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 123;
-            this.label2.Text = "当前温度:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(593, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
-            this.label3.TabIndex = 124;
-            this.label3.Text = "当前湿度:";
+            this.btnsendcali.Click += new System.EventHandler(this.btnsendcali_Click);
             // 
             // btnanalyze
             // 
@@ -626,14 +642,14 @@
             // 
             // progressBarCali
             // 
-            this.progressBarCali.Location = new System.Drawing.Point(675, 590);
+            this.progressBarCali.Location = new System.Drawing.Point(630, 497);
             this.progressBarCali.Name = "progressBarCali";
             this.progressBarCali.Size = new System.Drawing.Size(252, 23);
             this.progressBarCali.TabIndex = 126;
             // 
             // btnpausecali
             // 
-            this.btnpausecali.Location = new System.Drawing.Point(92, 590);
+            this.btnpausecali.Location = new System.Drawing.Point(81, 497);
             this.btnpausecali.Name = "btnpausecali";
             this.btnpausecali.Size = new System.Drawing.Size(75, 23);
             this.btnpausecali.TabIndex = 127;
@@ -644,7 +660,7 @@
             // labelprogress
             // 
             this.labelprogress.AutoSize = true;
-            this.labelprogress.Location = new System.Drawing.Point(616, 595);
+            this.labelprogress.Location = new System.Drawing.Point(571, 502);
             this.labelprogress.Name = "labelprogress";
             this.labelprogress.Size = new System.Drawing.Size(53, 12);
             this.labelprogress.TabIndex = 128;
@@ -653,46 +669,511 @@
             // labelcompleted
             // 
             this.labelcompleted.AutoSize = true;
-            this.labelcompleted.Location = new System.Drawing.Point(819, 616);
+            this.labelcompleted.Location = new System.Drawing.Point(885, 502);
             this.labelcompleted.Name = "labelcompleted";
             this.labelcompleted.Size = new System.Drawing.Size(59, 12);
             this.labelcompleted.TabIndex = 129;
             this.labelcompleted.Text = "已完成0/0";
             // 
+            // dmTabCtrl
+            // 
+            this.dmTabCtrl.BackColor = System.Drawing.Color.Transparent;
+            this.dmTabCtrl.Controls.Add(this.TabCalibrate);
+            this.dmTabCtrl.Controls.Add(this.TabEvaluate);
+            this.dmTabCtrl.ItemSize = new System.Drawing.Size(80, 32);
+            this.dmTabCtrl.Location = new System.Drawing.Point(12, 31);
+            this.dmTabCtrl.Name = "dmTabCtrl";
+            this.dmTabCtrl.SelectedIndex = 0;
+            this.dmTabCtrl.Size = new System.Drawing.Size(994, 572);
+            this.dmTabCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.dmTabCtrl.TabIndex = 130;
+            this.dmTabCtrl.SelectedIndexChanged += dmTabCtrl_SelectedIndexChanged; 
+            // 
+            // TabCalibrate
+            // 
+            this.TabCalibrate.Controls.Add(this.btnReadCali);
+            this.TabCalibrate.Controls.Add(this.dgvCaliItem);
+            this.TabCalibrate.Controls.Add(this.btnpausecali);
+            this.TabCalibrate.Controls.Add(this.labelcompleted);
+            this.TabCalibrate.Controls.Add(this.labelTotalRecord);
+            this.TabCalibrate.Controls.Add(this.labelCurPage);
+            this.TabCalibrate.Controls.Add(this.groupBox1);
+            this.TabCalibrate.Controls.Add(this.btnsendcali);
+            this.TabCalibrate.Controls.Add(this.btnReset);
+            this.TabCalibrate.Controls.Add(this.btnNextPage);
+            this.TabCalibrate.Controls.Add(btnDeleteAllPoint);
+            this.TabCalibrate.Controls.Add(this.labelprogress);
+            this.TabCalibrate.Controls.Add(this.btnDeletePoint);
+            this.TabCalibrate.Controls.Add(this.btnPrePage);
+            this.TabCalibrate.Controls.Add(this.btncancelcali);
+            this.TabCalibrate.Controls.Add(this.btnAddPoint);
+            this.TabCalibrate.Controls.Add(this.groupBox2);
+            this.TabCalibrate.Controls.Add(this.groupBox3);
+            this.TabCalibrate.Controls.Add(this.progressBarCali);
+            this.TabCalibrate.Controls.Add(this.btnstartcali);
+            this.TabCalibrate.Controls.Add(this.btnsavecali);
+            this.TabCalibrate.Location = new System.Drawing.Point(4, 36);
+            this.TabCalibrate.Name = "TabCalibrate";
+            this.TabCalibrate.Padding = new System.Windows.Forms.Padding(3);
+            this.TabCalibrate.Size = new System.Drawing.Size(986, 532);
+            this.TabCalibrate.TabIndex = 0;
+            this.TabCalibrate.Text = "自动校准";
+            this.TabCalibrate.UseVisualStyleBackColor = true;
+            // 
+            // btnReadCali
+            // 
+            this.btnReadCali.Location = new System.Drawing.Point(451, 497);
+            this.btnReadCali.Name = "btnReadCali";
+            this.btnReadCali.Size = new System.Drawing.Size(75, 23);
+            this.btnReadCali.TabIndex = 130;
+            this.btnReadCali.Text = "读取结果";
+            this.btnReadCali.UseVisualStyleBackColor = true;
+            this.btnReadCali.Click += new System.EventHandler(this.btnReadCali_Click);
+            // 
+            // TabEvaluate
+            // 
+            this.TabEvaluate.Controls.Add(this.groupBox8);
+            this.TabEvaluate.Controls.Add(this.btnDividerReset);
+            this.TabEvaluate.Controls.Add(this.groupBox7);
+            this.TabEvaluate.Controls.Add(this.groupBox6);
+            this.TabEvaluate.Controls.Add(this.labelTotalRecordDivider);
+            this.TabEvaluate.Controls.Add(this.labelCurPageDivider);
+            this.TabEvaluate.Controls.Add(this.btnnextpage_divider);
+            this.TabEvaluate.Controls.Add(this.btnprepage_divider);
+            this.TabEvaluate.Controls.Add(this.groupBox5);
+            this.TabEvaluate.Controls.Add(this.label2);
+            this.TabEvaluate.Controls.Add(this.label3);
+            this.TabEvaluate.Controls.Add(this.progressBar1);
+            this.TabEvaluate.Controls.Add(this.btnDividerPause);
+            this.TabEvaluate.Controls.Add(this.btnDividerCancel);
+            this.TabEvaluate.Controls.Add(this.btnDividerStart);
+            this.TabEvaluate.Controls.Add(this.btnSaveDivider);
+            this.TabEvaluate.Controls.Add(this.groupBox4);
+            this.TabEvaluate.Controls.Add(this.dgvDivider);
+            this.TabEvaluate.Location = new System.Drawing.Point(4, 36);
+            this.TabEvaluate.Name = "TabEvaluate";
+            this.TabEvaluate.Padding = new System.Windows.Forms.Padding(3);
+            this.TabEvaluate.Size = new System.Drawing.Size(986, 532);
+            this.TabEvaluate.TabIndex = 1;
+            this.TabEvaluate.Text = "分压器监测";
+            this.TabEvaluate.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.rbMeasTypeCur);
+            this.groupBox8.Controls.Add(this.rbMeasTypeAll);
+            this.groupBox8.Location = new System.Drawing.Point(451, 12);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(120, 45);
+            this.groupBox8.TabIndex = 143;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "测量种类";
+            // 
+            // rbMeasTypeCur
+            // 
+            this.rbMeasTypeCur.AutoSize = true;
+            this.rbMeasTypeCur.Location = new System.Drawing.Point(15, 20);
+            this.rbMeasTypeCur.Name = "rbMeasTypeCur";
+            this.rbMeasTypeCur.Size = new System.Drawing.Size(47, 16);
+            this.rbMeasTypeCur.TabIndex = 109;
+            this.rbMeasTypeCur.TabStop = true;
+            this.rbMeasTypeCur.Text = "当前";
+            this.rbMeasTypeCur.UseVisualStyleBackColor = true;
+            this.rbMeasTypeCur.CheckedChanged += new System.EventHandler(this.rbMeasTypeCur_CheckedChanged);
+            // 
+            // rbMeasTypeAll
+            // 
+            this.rbMeasTypeAll.AutoSize = true;
+            this.rbMeasTypeAll.Location = new System.Drawing.Point(66, 20);
+            this.rbMeasTypeAll.Name = "rbMeasTypeAll";
+            this.rbMeasTypeAll.Size = new System.Drawing.Size(47, 16);
+            this.rbMeasTypeAll.TabIndex = 110;
+            this.rbMeasTypeAll.TabStop = true;
+            this.rbMeasTypeAll.Text = "全部";
+            this.rbMeasTypeAll.UseVisualStyleBackColor = true;
+            // 
+            // btnDividerReset
+            // 
+            this.btnDividerReset.Location = new System.Drawing.Point(340, 503);
+            this.btnDividerReset.Name = "btnDividerReset";
+            this.btnDividerReset.Size = new System.Drawing.Size(75, 23);
+            this.btnDividerReset.TabIndex = 142;
+            this.btnDividerReset.Text = "重置结果";
+            this.btnDividerReset.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.rbCycleYes);
+            this.groupBox7.Controls.Add(this.rbCycleNo);
+            this.groupBox7.Location = new System.Drawing.Point(577, 12);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(109, 45);
+            this.groupBox7.TabIndex = 141;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "循环测量";
+            // 
+            // rbCycleYes
+            // 
+            this.rbCycleYes.AutoSize = true;
+            this.rbCycleYes.Location = new System.Drawing.Point(15, 20);
+            this.rbCycleYes.Name = "rbCycleYes";
+            this.rbCycleYes.Size = new System.Drawing.Size(35, 16);
+            this.rbCycleYes.TabIndex = 109;
+            this.rbCycleYes.TabStop = true;
+            this.rbCycleYes.Text = "是";
+            this.rbCycleYes.UseVisualStyleBackColor = true;
+            this.rbCycleYes.CheckedChanged += new System.EventHandler(this.rbCycleYes_CheckedChanged);
+            // 
+            // rbCycleNo
+            // 
+            this.rbCycleNo.AutoSize = true;
+            this.rbCycleNo.Location = new System.Drawing.Point(66, 20);
+            this.rbCycleNo.Name = "rbCycleNo";
+            this.rbCycleNo.Size = new System.Drawing.Size(35, 16);
+            this.rbCycleNo.TabIndex = 110;
+            this.rbCycleNo.TabStop = true;
+            this.rbCycleNo.Text = "否";
+            this.rbCycleNo.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.rbSmallUtilDivider);
+            this.groupBox6.Controls.Add(this.rbBigUtilDivider);
+            this.groupBox6.Location = new System.Drawing.Point(692, 12);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(87, 45);
+            this.groupBox6.TabIndex = 140;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "单位";
+            // 
+            // rbSmallUtilDivider
+            // 
+            this.rbSmallUtilDivider.AutoSize = true;
+            this.rbSmallUtilDivider.Location = new System.Drawing.Point(10, 20);
+            this.rbSmallUtilDivider.Name = "rbSmallUtilDivider";
+            this.rbSmallUtilDivider.Size = new System.Drawing.Size(29, 16);
+            this.rbSmallUtilDivider.TabIndex = 109;
+            this.rbSmallUtilDivider.TabStop = true;
+            this.rbSmallUtilDivider.Text = "V";
+            this.rbSmallUtilDivider.UseVisualStyleBackColor = true;
+            // 
+            // rbBigUtilDivider
+            // 
+            this.rbBigUtilDivider.AutoSize = true;
+            this.rbBigUtilDivider.Location = new System.Drawing.Point(44, 20);
+            this.rbBigUtilDivider.Name = "rbBigUtilDivider";
+            this.rbBigUtilDivider.Size = new System.Drawing.Size(35, 16);
+            this.rbBigUtilDivider.TabIndex = 110;
+            this.rbBigUtilDivider.TabStop = true;
+            this.rbBigUtilDivider.Text = "kV";
+            this.rbBigUtilDivider.UseVisualStyleBackColor = true;
+            // 
+            // labelTotalRecordDivider
+            // 
+            this.labelTotalRecordDivider.AutoSize = true;
+            this.labelTotalRecordDivider.Location = new System.Drawing.Point(893, 458);
+            this.labelTotalRecordDivider.Name = "labelTotalRecordDivider";
+            this.labelTotalRecordDivider.Size = new System.Drawing.Size(41, 12);
+            this.labelTotalRecordDivider.TabIndex = 139;
+            this.labelTotalRecordDivider.Text = "总记录";
+            // 
+            // labelCurPageDivider
+            // 
+            this.labelCurPageDivider.AutoSize = true;
+            this.labelCurPageDivider.Location = new System.Drawing.Point(784, 458);
+            this.labelCurPageDivider.Name = "labelCurPageDivider";
+            this.labelCurPageDivider.Size = new System.Drawing.Size(41, 12);
+            this.labelCurPageDivider.TabIndex = 138;
+            this.labelCurPageDivider.Text = "当前页";
+            // 
+            // btnnextpage_divider
+            // 
+            this.btnnextpage_divider.Location = new System.Drawing.Point(101, 458);
+            this.btnnextpage_divider.Name = "btnnextpage_divider";
+            this.btnnextpage_divider.Size = new System.Drawing.Size(75, 23);
+            this.btnnextpage_divider.TabIndex = 137;
+            this.btnnextpage_divider.Text = "下一页";
+            this.btnnextpage_divider.UseVisualStyleBackColor = true;
+            this.btnnextpage_divider.Click += new System.EventHandler(this.btnnextpage_divider_Click);
+            // 
+            // btnprepage_divider
+            // 
+            this.btnprepage_divider.Location = new System.Drawing.Point(14, 458);
+            this.btnprepage_divider.Name = "btnprepage_divider";
+            this.btnprepage_divider.Size = new System.Drawing.Size(75, 23);
+            this.btnprepage_divider.TabIndex = 136;
+            this.btnprepage_divider.Text = "上一页";
+            this.btnprepage_divider.UseVisualStyleBackColor = true;
+            this.btnprepage_divider.Click += new System.EventHandler(this.btnprepage_divider_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rbvac);
+            this.groupBox5.Controls.Add(this.rbvdcn);
+            this.groupBox5.Controls.Add(this.rbf);
+            this.groupBox5.Controls.Add(this.rbvdcp);
+            this.groupBox5.Location = new System.Drawing.Point(14, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(305, 45);
+            this.groupBox5.TabIndex = 135;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "控制变量";
+            // 
+            // rbvac
+            // 
+            this.rbvac.AutoSize = true;
+            this.rbvac.Location = new System.Drawing.Point(171, 20);
+            this.rbvac.Name = "rbvac";
+            this.rbvac.Size = new System.Drawing.Size(71, 16);
+            this.rbvac.TabIndex = 109;
+            this.rbvac.TabStop = true;
+            this.rbvac.Text = "电压(AC)";
+            this.rbvac.UseVisualStyleBackColor = true;
+            this.rbvac.Click += new System.EventHandler(this.radioButton_CheckedChanged_Divider);
+            // 
+            // rbvdcn
+            // 
+            this.rbvdcn.AutoSize = true;
+            this.rbvdcn.Location = new System.Drawing.Point(88, 20);
+            this.rbvdcn.Name = "rbvdcn";
+            this.rbvdcn.Size = new System.Drawing.Size(77, 16);
+            this.rbvdcn.TabIndex = 108;
+            this.rbvdcn.TabStop = true;
+            this.rbvdcn.Text = "电压(DC-)";
+            this.rbvdcn.UseVisualStyleBackColor = true;
+            this.rbvdcn.Click += new System.EventHandler(this.radioButton_CheckedChanged_Divider);
+            // 
+            // rbf
+            // 
+            this.rbf.AutoSize = true;
+            this.rbf.Location = new System.Drawing.Point(248, 20);
+            this.rbf.Name = "rbf";
+            this.rbf.Size = new System.Drawing.Size(47, 16);
+            this.rbf.TabIndex = 107;
+            this.rbf.TabStop = true;
+            this.rbf.Text = "频率";
+            this.rbf.UseVisualStyleBackColor = true;
+            this.rbf.Click += new System.EventHandler(this.radioButton_CheckedChanged_Divider);
+            // 
+            // rbvdcp
+            // 
+            this.rbvdcp.AutoSize = true;
+            this.rbvdcp.Location = new System.Drawing.Point(6, 20);
+            this.rbvdcp.Name = "rbvdcp";
+            this.rbvdcp.Size = new System.Drawing.Size(77, 16);
+            this.rbvdcp.TabIndex = 106;
+            this.rbvdcp.TabStop = true;
+            this.rbvdcp.Text = "电压(DC+)";
+            this.rbvdcp.UseVisualStyleBackColor = true;
+            this.rbvdcp.Click += new System.EventHandler(this.radioButton_CheckedChanged_Divider);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(908, 508);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.TabIndex = 134;
+            this.label2.Text = "已完成0/0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(594, 508);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 133;
+            this.label3.Text = "当前进度";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(653, 503);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(252, 23);
+            this.progressBar1.TabIndex = 132;
+            // 
+            // btnDividerPause
+            // 
+            this.btnDividerPause.Location = new System.Drawing.Point(93, 503);
+            this.btnDividerPause.Name = "btnDividerPause";
+            this.btnDividerPause.Size = new System.Drawing.Size(75, 23);
+            this.btnDividerPause.TabIndex = 131;
+            this.btnDividerPause.Text = "暂停监测";
+            this.btnDividerPause.UseVisualStyleBackColor = true;
+            // 
+            // btnDividerCancel
+            // 
+            this.btnDividerCancel.Location = new System.Drawing.Point(175, 503);
+            this.btnDividerCancel.Name = "btnDividerCancel";
+            this.btnDividerCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnDividerCancel.TabIndex = 130;
+            this.btnDividerCancel.Text = "取消监测";
+            this.btnDividerCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnDividerStart
+            // 
+            this.btnDividerStart.Location = new System.Drawing.Point(13, 503);
+            this.btnDividerStart.Name = "btnDividerStart";
+            this.btnDividerStart.Size = new System.Drawing.Size(75, 23);
+            this.btnDividerStart.TabIndex = 128;
+            this.btnDividerStart.Text = "开始监测";
+            this.btnDividerStart.UseVisualStyleBackColor = true;
+            this.btnDividerStart.Click += new System.EventHandler(this.btnDividerStart_Click);
+            // 
+            // btnSaveDivider
+            // 
+            this.btnSaveDivider.Location = new System.Drawing.Point(257, 503);
+            this.btnSaveDivider.Name = "btnSaveDivider";
+            this.btnSaveDivider.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveDivider.TabIndex = 129;
+            this.btnSaveDivider.Text = "保存结果";
+            this.btnSaveDivider.UseVisualStyleBackColor = true;
+            this.btnSaveDivider.Click += new System.EventHandler(this.btnSaveDivider_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rbSaveAuto);
+            this.groupBox4.Controls.Add(this.rbSaveMan);
+            this.groupBox4.Location = new System.Drawing.Point(325, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(120, 45);
+            this.groupBox4.TabIndex = 122;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "保存数据";
+            // 
+            // rbSaveAuto
+            // 
+            this.rbSaveAuto.AutoSize = true;
+            this.rbSaveAuto.Location = new System.Drawing.Point(15, 20);
+            this.rbSaveAuto.Name = "rbSaveAuto";
+            this.rbSaveAuto.Size = new System.Drawing.Size(47, 16);
+            this.rbSaveAuto.TabIndex = 109;
+            this.rbSaveAuto.TabStop = true;
+            this.rbSaveAuto.Text = "自动";
+            this.rbSaveAuto.UseVisualStyleBackColor = true;
+            this.rbSaveAuto.CheckedChanged += new System.EventHandler(this.rbSaveAuto_CheckedChanged);
+            // 
+            // rbSaveMan
+            // 
+            this.rbSaveMan.AutoSize = true;
+            this.rbSaveMan.Location = new System.Drawing.Point(66, 20);
+            this.rbSaveMan.Name = "rbSaveMan";
+            this.rbSaveMan.Size = new System.Drawing.Size(47, 16);
+            this.rbSaveMan.TabIndex = 110;
+            this.rbSaveMan.TabStop = true;
+            this.rbSaveMan.Text = "手动";
+            this.rbSaveMan.UseVisualStyleBackColor = true;
+            // 
+            // dgvDivider
+            // 
+            this.dgvDivider.AllowUserToOrderColumns = true;
+            this.dgvDivider.AllowUserToResizeColumns = false;
+            this.dgvDivider.AllowUserToResizeRows = false;
+            this.dgvDivider.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDivider.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dgvDivider.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvDivider.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dgvDivider.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDivider.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvDivider.ColumnHeadersHeight = 48;
+            this.dgvDivider.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvDivider.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ModeDivider,
+            this.SourceDivider,
+            this.FrequencyDivider,
+            this.StandDivider,
+            this.TestDivider,
+            this.TemperatureDivider,
+            this.HumidityDivider,
+            this.StateDivider});
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDivider.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvDivider.EnableHeadersVisualStyles = false;
+            this.dgvDivider.GridColor = System.Drawing.Color.Black;
+            this.dgvDivider.Location = new System.Drawing.Point(14, 69);
+            this.dgvDivider.MinimumSize = new System.Drawing.Size(0, 32);
+            this.dgvDivider.Name = "dgvDivider";
+            this.dgvDivider.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dgvDivider.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvDivider.RowTemplate.Height = 30;
+            this.dgvDivider.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvDivider.Size = new System.Drawing.Size(959, 370);
+            this.dgvDivider.StandardTab = true;
+            this.dgvDivider.TabIndex = 93;
+            // 
+            // ModeDivider
+            // 
+            this.ModeDivider.DataPropertyName = "Mode";
+            this.ModeDivider.HeaderText = "模式";
+            this.ModeDivider.Name = "ModeDivider";
+            // 
+            // SourceDivider
+            // 
+            this.SourceDivider.DataPropertyName = "Source";
+            this.SourceDivider.HeaderText = "源电压";
+            this.SourceDivider.Name = "SourceDivider";
+            // 
+            // FrequencyDivider
+            // 
+            this.FrequencyDivider.DataPropertyName = "Frequency";
+            this.FrequencyDivider.HeaderText = "源频率";
+            this.FrequencyDivider.Name = "FrequencyDivider";
+            // 
+            // StandDivider
+            // 
+            this.StandDivider.DataPropertyName = "StandOut";
+            this.StandDivider.HeaderText = "标准分压器电压";
+            this.StandDivider.Name = "StandDivider";
+            // 
+            // TestDivider
+            // 
+            this.TestDivider.DataPropertyName = "TestOut";
+            this.TestDivider.HeaderText = "待测分压器电压";
+            this.TestDivider.Name = "TestDivider";
+            // 
+            // TemperatureDivider
+            // 
+            this.TemperatureDivider.DataPropertyName = "Temperature";
+            this.TemperatureDivider.HeaderText = "温度";
+            this.TemperatureDivider.Name = "TemperatureDivider";
+            // 
+            // HumidityDivider
+            // 
+            this.HumidityDivider.DataPropertyName = "Humidity";
+            this.HumidityDivider.HeaderText = "湿度";
+            this.HumidityDivider.Name = "HumidityDivider";
+            // 
+            // StateDivider
+            // 
+            this.StateDivider.DataPropertyName = "State";
+            this.StateDivider.HeaderText = "状态";
+            this.StateDivider.Name = "StateDivider";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 655);
-            this.Controls.Add(this.labelcompleted);
-            this.Controls.Add(this.labelprogress);
-            this.Controls.Add(this.btnpausecali);
-            this.Controls.Add(this.progressBarCali);
+            this.ClientSize = new System.Drawing.Size(1234, 611);
+            this.Controls.Add(this.dmTabCtrl);
             this.Controls.Add(this.btnanalyze);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnsendcali);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.btncancelcali);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelTotalRecord);
-            this.Controls.Add(this.labelCurPage);
-            this.Controls.Add(this.btnNextPage);
-            this.Controls.Add(this.btnPrePage);
             this.Controls.Add(this.textReceive);
             this.Controls.Add(this.textSend);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(btnDeleteAllPoint);
-            this.Controls.Add(this.btnDeletePoint);
-            this.Controls.Add(this.btnInsertPoint);
-            this.Controls.Add(this.btnAddPoint);
-            this.Controls.Add(this.dgvCaliItem);
-            this.Controls.Add(this.btnsavecali);
-            this.Controls.Add(this.btnstartcali);
             this.Controls.Add(this.btncaliset);
             this.Controls.Add(this.btnuser);
             this.Controls.Add(this.btnresult);
@@ -709,6 +1190,22 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.dmTabCtrl.ResumeLayout(false);
+            this.TabCalibrate.ResumeLayout(false);
+            this.TabCalibrate.PerformLayout();
+            this.TabEvaluate.ResumeLayout(false);
+            this.TabEvaluate.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDivider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -725,7 +1222,6 @@
         private System.Windows.Forms.Button btnsavecali;
         private System.Windows.Forms.DataGridView dgvCaliItem;
         private System.Windows.Forms.Button btnAddPoint;
-        private System.Windows.Forms.Button btnInsertPoint;
         private System.Windows.Forms.Button btnDeletePoint;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnSend;
@@ -754,8 +1250,6 @@
         private System.Windows.Forms.RadioButton rbTypeAll;
         private System.Windows.Forms.RadioButton rbTypeCur;
         private System.Windows.Forms.Button btnsendcali;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnanalyze;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Source;
@@ -767,6 +1261,49 @@
         private System.Windows.Forms.Button btnpausecali;
         private System.Windows.Forms.Label labelprogress;
         private System.Windows.Forms.Label labelcompleted;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private DMSkin.Controls.DMTabControl dmTabCtrl;
+        private System.Windows.Forms.TabPage TabCalibrate;
+        private System.Windows.Forms.TabPage TabEvaluate;
+        private System.Windows.Forms.DataGridView dgvDivider;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnDividerPause;
+        private System.Windows.Forms.Button btnDividerCancel;
+        private System.Windows.Forms.Button btnDividerStart;
+        private System.Windows.Forms.Button btnSaveDivider;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rbSaveAuto;
+        private System.Windows.Forms.RadioButton rbSaveMan;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rbf;
+        private System.Windows.Forms.RadioButton rbvdcp;
+        private System.Windows.Forms.RadioButton rbvac;
+        private System.Windows.Forms.RadioButton rbvdcn;
+        private System.Windows.Forms.Label labelTotalRecordDivider;
+        private System.Windows.Forms.Button btnnextpage_divider;
+        private System.Windows.Forms.Button btnprepage_divider;
+        private System.Windows.Forms.Label labelCurPageDivider;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton rbSmallUtilDivider;
+        private System.Windows.Forms.RadioButton rbBigUtilDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourceDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FrequencyDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StandDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TestDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TemperatureDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HumidityDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StateDivider;
+        private System.Windows.Forms.Button btnReadCali;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton rbCycleYes;
+        private System.Windows.Forms.RadioButton rbCycleNo;
+        private System.Windows.Forms.Button btnDividerReset;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.RadioButton rbMeasTypeCur;
+        private System.Windows.Forms.RadioButton rbMeasTypeAll;
     }
 }
 

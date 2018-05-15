@@ -19,9 +19,9 @@ namespace AutoCalibrationSystem
         public static int MINNUM = 2;
         public static int MAXNUMF = 20;
         public static int MAXNUMV = 30;
-        public static int VLOWNUM = 5;
-        public static int VDCPNUM = 25;
-        public static int VACNUM = 25;
+        public static int VLOWNUM = 3;
+        public static int VDCPNUM = 23;
+        public static int VACNUM = 23;
         public CaliData()
         {
             vdcData = new List<CaliItem>(VDCPNUM*2);
@@ -186,9 +186,7 @@ namespace AutoCalibrationSystem
             //正向
             vdcData[0].Source = 0.05f; //索引从1开始
             vdcData[1].Source = 0.1f;
-            vdcData[2].Source = 0.3f;
-            vdcData[3].Source = 0.5f;
-            vdcData[4].Source = 0.6f;
+            vdcData[2].Source = 0.5f;
             for (int i = VLOWNUM; i < VDCPNUM; i++)
             {
                 vdcData[i].Source = i - (VLOWNUM-1);
@@ -196,9 +194,7 @@ namespace AutoCalibrationSystem
             //反向
             vdcData[VDCPNUM].Source = -0.05f;
             vdcData[VDCPNUM + 1].Source = -0.1f;
-            vdcData[VDCPNUM + 2].Source = -0.3f;
-            vdcData[VDCPNUM + 3].Source = -0.5f;
-            vdcData[VDCPNUM + 4].Source = -0.6f;
+            vdcData[VDCPNUM + 2].Source = -0.5f;
             for (int i = VDCPNUM + 5; i < vdcData.Count; i++)
             {
                 vdcData[i].Source = -1 * (i - (VDCPNUM +4));
@@ -207,8 +203,6 @@ namespace AutoCalibrationSystem
             vacvData[0].Source = 0.05f;
             vacvData[1].Source = 0.1f;
             vacvData[2].Source = 0.3f;           
-            vacvData[3].Source = 0.5f;
-            vacvData[4].Source = 0.6f;
             for (int i = VLOWNUM; i < vacvData.Count; i++)
             {
                 vacvData[i].Source = i - (VLOWNUM - 1);
