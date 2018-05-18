@@ -60,7 +60,10 @@ namespace AutoCalibrationSystem.DataAccess
                 adapter.Fill(ds);
             }
             Close();
-            return ds.Tables[0];
+            if (ds.Tables.Count > 0)
+                return ds.Tables[0];
+            else
+                return null;
         }
         public DataTable ExecuteQuery(string sql, params MySqlParameter[] parameters)
         {
@@ -77,7 +80,10 @@ namespace AutoCalibrationSystem.DataAccess
                 adapter.Fill(ds);
             }
             Close();
-            return ds.Tables[0];
+            if (ds.Tables.Count > 0)
+                return ds.Tables[0];
+            else
+                return null;
         }
 
         #region insert 部分

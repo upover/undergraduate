@@ -58,9 +58,6 @@ E:\study\毕设\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibr
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
-E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
-E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
-E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\DMSkin.dll
@@ -71,10 +68,11 @@ G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
 G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\MySql.Data.dll
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe
-E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\DMSkin.dll
-E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\MySql.Data.dll
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.exe.config
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.CaliItemSetForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ComSetForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.MainForm.resources
@@ -82,4 +80,7 @@ E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\Au
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.DataAnalyzeForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.ResultManageForm.resources
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csproj.GenerateResource.Cache
-G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\bin\Debug\MySql.Data.dll
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.exe
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
+E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
