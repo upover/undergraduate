@@ -8,9 +8,9 @@ namespace AutoCalibrationSystem
 {
     public class CommandAgilent34410A
     {
-        public static string[] System = { "SYST:REM", "SYST:LOC" };
-        public static string[] Measure = { "MEAS:VOLT:DC?", "MEAS:VOLT:AC?", "MEAS:CURR:DC?", "MEAS:CURR:AC?", "MEAS:FREQ?" };
-        public enum cmdSystem { Remote, Local };
+        public static string[] System = { "SYST:REM", "SYST:LOC","*CLS" };
+        public static string[] Measure = { "MEAS:VOLT:DC? DEF,DEF", "MEAS:VOLT:AC? DEF,DEF", "MEAS:CURR:DC? DEF,DEF", "MEAS:CURR:AC? DEF,DEF", "MEAS:FREQ? DEF,DEF" };
+        public enum cmdSystem { Remote, Local,Clear };
         public enum cmdMeasure { VDC, VAC, IDC, IAC, FREQ };
     }
 }

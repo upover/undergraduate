@@ -30,10 +30,10 @@
         {
             System.Windows.Forms.Button btnDeleteAllPoint;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btLoginout = new System.Windows.Forms.Button();
             this.btncomset = new System.Windows.Forms.Button();
             this.btnresult = new System.Windows.Forms.Button();
@@ -106,9 +106,9 @@
             this.rbvdcn = new System.Windows.Forms.RadioButton();
             this.rbf = new System.Windows.Forms.RadioButton();
             this.rbvdcp = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelCompleteDivider = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBarDivider = new System.Windows.Forms.ProgressBar();
             this.btnDividerPause = new System.Windows.Forms.Button();
             this.btnDividerCancel = new System.Windows.Forms.Button();
             this.btnDividerStart = new System.Windows.Forms.Button();
@@ -232,14 +232,14 @@
             this.dgvCaliItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCaliItem.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvCaliItem.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCaliItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCaliItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCaliItem.ColumnHeadersHeight = 48;
             this.dgvCaliItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCaliItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -248,14 +248,14 @@
             this.StandOut,
             this.TestOut,
             this.State});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCaliItem.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCaliItem.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCaliItem.EnableHeadersVisualStyles = false;
             this.dgvCaliItem.GridColor = System.Drawing.Color.Black;
             this.dgvCaliItem.Location = new System.Drawing.Point(2, 66);
@@ -687,7 +687,6 @@
             this.dmTabCtrl.Size = new System.Drawing.Size(994, 572);
             this.dmTabCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.dmTabCtrl.TabIndex = 130;
-            this.dmTabCtrl.SelectedIndexChanged += dmTabCtrl_SelectedIndexChanged; 
             // 
             // TabCalibrate
             // 
@@ -741,9 +740,9 @@
             this.TabEvaluate.Controls.Add(this.btnnextpage_divider);
             this.TabEvaluate.Controls.Add(this.btnprepage_divider);
             this.TabEvaluate.Controls.Add(this.groupBox5);
-            this.TabEvaluate.Controls.Add(this.label2);
+            this.TabEvaluate.Controls.Add(this.labelCompleteDivider);
             this.TabEvaluate.Controls.Add(this.label3);
-            this.TabEvaluate.Controls.Add(this.progressBar1);
+            this.TabEvaluate.Controls.Add(this.progressBarDivider);
             this.TabEvaluate.Controls.Add(this.btnDividerPause);
             this.TabEvaluate.Controls.Add(this.btnDividerCancel);
             this.TabEvaluate.Controls.Add(this.btnDividerStart);
@@ -967,14 +966,14 @@
             this.rbvdcp.UseVisualStyleBackColor = true;
             this.rbvdcp.Click += new System.EventHandler(this.radioButton_CheckedChanged_Divider);
             // 
-            // label2
+            // labelCompleteDivider
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(908, 508);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 134;
-            this.label2.Text = "已完成0/0";
+            this.labelCompleteDivider.AutoSize = true;
+            this.labelCompleteDivider.Location = new System.Drawing.Point(908, 508);
+            this.labelCompleteDivider.Name = "labelCompleteDivider";
+            this.labelCompleteDivider.Size = new System.Drawing.Size(59, 12);
+            this.labelCompleteDivider.TabIndex = 134;
+            this.labelCompleteDivider.Text = "已完成0/0";
             // 
             // label3
             // 
@@ -985,12 +984,12 @@
             this.label3.TabIndex = 133;
             this.label3.Text = "当前进度";
             // 
-            // progressBar1
+            // progressBarDivider
             // 
-            this.progressBar1.Location = new System.Drawing.Point(653, 503);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(252, 23);
-            this.progressBar1.TabIndex = 132;
+            this.progressBarDivider.Location = new System.Drawing.Point(653, 503);
+            this.progressBarDivider.Name = "progressBarDivider";
+            this.progressBarDivider.Size = new System.Drawing.Size(252, 23);
+            this.progressBarDivider.TabIndex = 132;
             // 
             // btnDividerPause
             // 
@@ -1074,14 +1073,14 @@
             this.dgvDivider.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDivider.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvDivider.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDivider.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("幼圆", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDivider.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDivider.ColumnHeadersHeight = 48;
             this.dgvDivider.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDivider.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1093,14 +1092,14 @@
             this.TemperatureDivider,
             this.HumidityDivider,
             this.StateDivider});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDivider.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDivider.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDivider.EnableHeadersVisualStyles = false;
             this.dgvDivider.GridColor = System.Drawing.Color.Black;
             this.dgvDivider.Location = new System.Drawing.Point(14, 69);
@@ -1266,9 +1265,9 @@
         private System.Windows.Forms.TabPage TabCalibrate;
         private System.Windows.Forms.TabPage TabEvaluate;
         private System.Windows.Forms.DataGridView dgvDivider;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelCompleteDivider;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBarDivider;
         private System.Windows.Forms.Button btnDividerPause;
         private System.Windows.Forms.Button btnDividerCancel;
         private System.Windows.Forms.Button btnDividerStart;

@@ -19,7 +19,7 @@ namespace AutoCalibrationSystem
 {
     public partial class MainForm : Form
     {
-
+        public const int INTERNAL = 1000;
         public delegate void ProcessDelegate(bool nextpage);
         //进度条
         private delegate void ProgressBarShow(int i);
@@ -262,7 +262,8 @@ namespace AutoCalibrationSystem
         private void MainForm_Load(object sender, EventArgs e)
         {
             SocketTimer = new System.Timers.Timer();
-
+            SocketTimer_2 = new System.Timers.Timer();
+ 
             CS9010Timer = new System.Timers.Timer();
             CS9010Timer.Elapsed += CS9010Timer_Elapsed;
             
@@ -295,8 +296,7 @@ namespace AutoCalibrationSystem
             this.rbvdcp.Checked = true;
 
             //默认校准方式为当前
-            this.rbTypeCur.Checked = true;
-            
+            this.rbTypeCur.Checked = true;            
 
             //暂时提供统一的一个单位
             this.rbUnitBig.Checked = true;
@@ -310,6 +310,13 @@ namespace AutoCalibrationSystem
             
             dgvDivider.RowTemplate.MinimumHeight = 32;
             dgvDivider.AutoGenerateColumns = false;
+
+            //分压器监测默认设置
+            this.rbCycleNo.Checked = true;
+            this.rbMeasTypeCur.Checked = true;
+            this.rbSaveMan.Checked = true;
+            this.rbvdcp.Checked = true;
+
             //显示列表
             //IntiCaliItemGridView();
             InitGridView();
@@ -318,9 +325,10 @@ namespace AutoCalibrationSystem
             InitDividerGridViewByMode(EnumMode.Divider_V_DCP);
             Load_Page(false);
             Load_Page_Divider(false);
+
+            //添加标签切换函数
+            this.dmTabCtrl.SelectedIndexChanged += dmTabCtrl_SelectedIndexChanged;
         }
-
-
 
         //网口关闭事件
         bool comSetForm_LanCloseHandler(object sender, EventArgs e)
@@ -333,18 +341,21 @@ namespace AutoCalibrationSystem
                 {
                     case "lanStand1":
                         instrumentsState.Agilent34410AState = EnumInstrumentState.INIT;
+                        SocketTimer.Enabled = false;
                         //关闭socket
                         socketStand.Close();
                         break;
                     case "lanStand2":
                         instrumentsState.Agilent34410AState_2 = EnumInstrumentState.INIT;
+                        SocketTimer_2.Enabled = false;
                         //关闭socket
                         socketStand2.Close();
                         break;
                 }
                 return true;
             }
-            catch (Exception) {
+            catch (Exception ex) {
+                MessageBox.Show("关闭网口出错:" + ex.ToString());
                 return false;
             }
         }
@@ -526,6 +537,7 @@ namespace AutoCalibrationSystem
                     {
                         comStand2.PortName = tempSetForm.boxComStand2Value;
                         comStand2.BaudRate = int.Parse(tempSetForm.boxBaudrateStand2Value);
+                        comStand2.DtrEnable = Enabled;
                         comStand2.DataReceived += comStand2_DataReceived;
                         try
                         {
@@ -608,7 +620,6 @@ namespace AutoCalibrationSystem
                         try
                         {
                             comTandH.Open();
-                            TandHTimer.Enabled = true;
                         }
                         catch (UnauthorizedAccessException)
                         {
@@ -988,6 +999,7 @@ namespace AutoCalibrationSystem
                     break;
             }
         }
+
         //根据当前分压器测量选项，点数限制等
         private void radioButton_CheckedChanged_Divider(object sender, EventArgs e)
         {
@@ -1009,6 +1021,8 @@ namespace AutoCalibrationSystem
             }
             dividerProcess.initiMode = mode;
             dividerProcess.ResetProcess(mode, dividerData);
+            InitDividerGridViewByMode(mode);
+            Load_Page_Divider(false);
         }
         //根据当前校准选项，变换单位，点数限制等
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -1088,8 +1102,8 @@ namespace AutoCalibrationSystem
             if (caliState == EnumCaliState.INITI)
             {
                 //设置定时器定时时间
-                Agilent34410ATimer.Interval = 3000;
-                CS9010Timer.Interval = 3000;
+                Agilent34410ATimer.Interval = INTERNAL;
+                CS9010Timer.Interval = INTERNAL;
             }                
             //从取消校准，开始校准
             else if (caliState == EnumCaliState.CANCEL)
@@ -1126,7 +1140,7 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        Fluke5520ATimer.Interval = 3000;
+                        Fluke5520ATimer.Interval = INTERNAL;
                         Fluke5520ATimer.Enabled = true;
                         instrumentsState.Fluke5520AState = EnumInstrumentState.LOCAL;
                     }
@@ -1140,7 +1154,7 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        CS9920ATimer.Interval = 3000;
+                        CS9920ATimer.Interval = INTERNAL;
                         instrumentsState.CS9920AState = EnumInstrumentState.INIT;
                         CS9920ATimer.Enabled = true;
                     }
@@ -1154,7 +1168,7 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        CS9920BTimer.Interval = 3000;
+                        CS9920BTimer.Interval = INTERNAL;
                         CS9920BTimer.Enabled = true;
                         instrumentsState.CS9920BState = EnumInstrumentState.INIT;
                     }
@@ -1165,7 +1179,7 @@ namespace AutoCalibrationSystem
 
             if (caliState != EnumCaliState.PAUSE)
             {
-                InitialProgressBar(caliProcess.totalNum);
+                InitialProgressBar(caliProcess.totalNum,mainMeasureType);
             }
             instrumentsState.CS9010State = EnumInstrumentState.INIT;
             caliProcess.complete = EnumCaliState.START; 
@@ -1245,27 +1259,65 @@ namespace AutoCalibrationSystem
             }
 
         }
+        //分压器进度条控件更新值
+        private void ShowProgressDivider(int current)
+        {
+            //说明，progressbar在主线程中定义，进度条线程访问progressbar时需要使用invoke，invokeRequired属性为true
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new ProgressBarShow(ShowProgressDivider), current);
+            }
+            //progressbar在主线程中定义，主线程直接访问progressbar
+            else
+            {
+                this.progressBarDivider.Value = current;
+                this.labelCompleteDivider.Text = "已完成:" + current.ToString() + "/" + this.progressBarDivider.Maximum;
+            }
+
+        }
         //进度条线程更新函数
         private void updateProgress(object end)
         {
             int current = 0;
             ShowProgress(current);
             int max = (int)end;
-            while (current < max)
+            while (current < this.progressBarCali.Maximum)
             {
                 current = caliProcess.curTotalNum;
-                //current += 3;
-                ShowProgress(current>max?max:current);
+                ShowProgress(current);
                 Thread.Sleep(1000);
             }
             progressbarThread.Abort();
             progressbarThread.Join();
         }
-        //开始进度条线程
-        private void InitialProgressBar(int end)
+        //分压器进度条线程更新函数
+        private void updateProgressDivider(object end)
         {
-            this.progressBarCali.Maximum = end;
-            progressbarThread = new Thread(new ParameterizedThreadStart(updateProgress));
+            int current = 0;
+            ShowProgressDivider(current);
+            int max = (int)end;
+            while (current < this.progressBarDivider.Maximum)
+            {
+                current = dividerProcess.curTotalNum;
+                ShowProgressDivider(current);
+                Thread.Sleep(1000);
+            }
+            progressbarThread.Abort();
+            progressbarThread.Join();
+        }        
+        //开始进度条线程
+        private void InitialProgressBar(int end,MainMeasureType type)
+        {
+            if (type == MainMeasureType.CALIBRATION)
+            {
+                this.progressBarCali.Maximum = end;
+                progressbarThread = new Thread(new ParameterizedThreadStart(updateProgress));
+            }
+            else
+            {
+                this.progressBarDivider.Maximum = end;
+                progressbarThread = new Thread(new ParameterizedThreadStart(updateProgressDivider));
+            }
             progressbarThread.Start(end);
         }
         //待校准表串口接收函数
@@ -1652,7 +1704,7 @@ namespace AutoCalibrationSystem
             comTest.Write(cmd);
             Console.WriteLine("发送到CS9010:" + cmd);
         } 
-        //标准表串口接收函数
+        //标准表1串口接收函数
         private void comStand_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int n = comStand.BytesToRead;
@@ -1723,7 +1775,7 @@ namespace AutoCalibrationSystem
                 MessageBox.Show("接收标准表2的消息出错:" + ex.ToString());
             }
         }
-        //标准表344410A接收数据后的处理函数
+        //标准表接收数据后的处理函数
         public void ResolveDataById(string receiveData,int id)
         {
             //对收到的字符进行转换
@@ -1759,9 +1811,9 @@ namespace AutoCalibrationSystem
                     sendcount34410A_2--;
                 } 
             }
-            Console.WriteLine("接收到34410A;" + receiveData+"编号:"+id);
+            Console.WriteLine("接收到34410A编号" + id + ":" + receiveData);
         }
-        //分压器监测时，标准表34410A保存测量值
+        //分压器监测时，标准表保存测量值
         public void SaveVoltToDividerData(float data, DividerProcess thisDividerProcess,int id)
         {
             List<DividerItem> list = null;
@@ -1800,7 +1852,7 @@ namespace AutoCalibrationSystem
             }
         }
 
-        //标准表34410A保存测量值
+        //校准时标准表34410A保存测量值
         public void SaveStandToCaliData(float data,CaliProcess thisCaliProcess) 
         {
             switch (thisCaliProcess.curMode)
@@ -1856,16 +1908,16 @@ namespace AutoCalibrationSystem
                 if (!comStand.IsOpen)
                 {
                     byte[] buffer = new byte[100];
-                    buffer = Encoding.Default.GetBytes(command);
+                    buffer = Encoding.Default.GetBytes(cmd);
                     //用网口
                     socketStand.Send(buffer);
                 }
                 else
                 {
                     //用串口
-                    comStand.Write(command);
+                    comStand.Write(cmd);
                 }
-                Console.WriteLine("发送到34410A:" + command);
+                Console.WriteLine("发送到34410A编号1:" + cmd);
             }
             catch (Exception ex)
             {
@@ -1878,27 +1930,27 @@ namespace AutoCalibrationSystem
             try
             {
                 string cmd = command;
-                cmd += "\n";
+                cmd += "\r\n";
                 if (!comStand2.IsOpen)
                 {
                     byte[] buffer = new byte[100];
-                    buffer = Encoding.Default.GetBytes(command);
+                    buffer = Encoding.Default.GetBytes(cmd);
                     //用网口
                     socketStand2.Send(buffer);
                 }
                 else
                 {
                     //用串口
-                    comStand2.Write(command);
+                    comStand2.Write(cmd);
                 }
-                Console.WriteLine("发送到34410A:" + command);
+                Console.WriteLine("发送到34410A编号2:" + cmd);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("标准表2发送消息出错:" + ex.Message);
             }
         }
-        //34410A定时函数
+        //校准时34410A定时发送函数
         private void Agilent34410ATimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (caliState == EnumCaliState.COMPLETE)
@@ -1912,7 +1964,8 @@ namespace AutoCalibrationSystem
             //判断是否已处于远控状态
             if (instrumentsState.Agilent34410AState != EnumInstrumentState.REMOTE)
             {
-                command += CommandAgilent34410A.System[(int)CommandAgilent34410A.cmdSystem.Remote]; 
+                command += CommandAgilent34410A.System[(int)CommandAgilent34410A.cmdSystem.Remote];
+                instrumentsState.Agilent34410AState = EnumInstrumentState.REMOTE;
             }
             else
             {                
@@ -1948,7 +2001,7 @@ namespace AutoCalibrationSystem
             }
             StandSendMessage(command);
         }
-        //5520A定时发送函数
+        //校准时5520A定时发送函数
         private void Fluke5520ATimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (caliState == EnumCaliState.COMPLETE)
@@ -2010,12 +2063,12 @@ namespace AutoCalibrationSystem
                 }
             }
         }
-        //Fluke5520A的串口接收函数        
+        //校准时Fluke5520A的串口接收函数        
         private void com5520A_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
         }
-        //CS9920B定时发送函数
+        //校准时CS9920B定时发送函数
         private void CS9920BTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (caliState == EnumCaliState.COMPLETE)
@@ -2239,7 +2292,7 @@ namespace AutoCalibrationSystem
             string result = "";
             com9920A.Read(buf, 0, n);
             result += System.Text.Encoding.Default.GetString(buf);
-            Console.WriteLine("CS9020ARecieved:" + result);
+            Console.WriteLine("接收到CS9020A:" + result);
             //接收结果处理
             if (instrumentsState.CS9920AState == EnumInstrumentState.INIT)
             {
@@ -2334,11 +2387,16 @@ namespace AutoCalibrationSystem
             if (instrumentsState.Agilent34410AState != EnumInstrumentState.REMOTE)
             {
                 command += CommandAgilent34410A.System[(int)CommandAgilent34410A.cmdSystem.Remote];
+                instrumentsState.Agilent34410AState = EnumInstrumentState.REMOTE;
             }
             else
             {
+                if (!(stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE))
+                {
+                    return;
+                }
                 //根据校准模式发送查询指令                
-                switch (caliProcess.curMode)
+                switch (dividerProcess.curMode)
                 {
                     case EnumMode.Divider_V_AC:
                     case EnumMode.Divider_F:
@@ -2372,9 +2430,17 @@ namespace AutoCalibrationSystem
             if (instrumentsState.Agilent34410AState_2 != EnumInstrumentState.REMOTE)
             {
                 command += CommandAgilent34410A.System[(int)CommandAgilent34410A.cmdSystem.Remote];
+                Stand2SendMessage(command);
+                command = "";
+                command += CommandAgilent34410A.System[(int)CommandAgilent34410A.cmdSystem.Clear];
+                instrumentsState.Agilent34410AState_2 = EnumInstrumentState.REMOTE;
             }
             else
             {
+                if ( !(stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE))
+                {
+                    return;
+                }
                 //根据校准模式发送查询指令                
                 switch (dividerProcess.curMode)
                 {
@@ -2515,8 +2581,14 @@ namespace AutoCalibrationSystem
                 if (stateCS9920A == StateSource.STOP)
                 {
                     command += CommandCS9920.SetVoltage[(int)CommandCS9920.cmdSetVoltage.AC];
-                    command += this.dividerProcess.getCS9920SourceString(dividerData);
-                    stateCS9920A = StateSource.SET_VALUE;
+                    string source = this.dividerProcess.getCS9920SourceString(dividerData);
+                    if(source == "")
+                        return;
+                    else
+                    {
+                        command += source;
+                        stateCS9920A = StateSource.SET_VALUE;
+                    }
                 }
                 //再设置时间，默认时间是3s，这里需要设置为不限制时间
                 else if (stateCS9920A == StateSource.SET_VALUE)
@@ -2638,13 +2710,13 @@ namespace AutoCalibrationSystem
                     com9920A.Write(cmd);
                     //已发送命令数加1
                     sendcount9920A++;
-                    Console.WriteLine("发送到CS9920A:" + command);
+                    Console.WriteLine("发送到CS9920A:" + cmd);
                     break;
                 case EnumInstrumentType.CS9920B:
                     com9920B.Write(cmd);
                     //已发送命令数加1
                     sendcount9920B++;
-                    Console.WriteLine("发送到CS9920B:" + command);
+                    Console.WriteLine("发送到CS9920B:" + cmd);
                     break;
             }
         }
@@ -2667,16 +2739,18 @@ namespace AutoCalibrationSystem
         {
             throw new NotImplementedException();
         }
-        //温湿度模块定时函数
+        //分压器监测时温湿度模块定时发送函数
         public void TandHTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (sendcountTandH != 0)
+            if (sendcountTandH > 0)
                 return;
             string queryString = "01 03 00 00 00 02 c4 0b";
             byte[] queryBytes = HexString2Bytes(queryString);
+
             if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
             {
                 comTandH.Write(queryBytes, 0, queryBytes.Length);
+                Console.WriteLine("发送到TandH:"+queryString);
                 sendcountTandH++;
             }
         }
@@ -2697,12 +2771,18 @@ namespace AutoCalibrationSystem
         void comTandH_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int n = comTandH.BytesToRead;
-            if (n <= 0)
+            if (n < 9)
             {
                 return;
             }
             byte[] readBuffer = new byte[n];
             comTandH.Read(readBuffer, 0, n);
+            string result = "";
+            for (int i = 0; i < readBuffer.Length; i++)
+            {
+                result += readBuffer[i]+" ";
+            }
+            Console.WriteLine("接收到TandH:" + result);
             if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
             {
                 //保存到dividerData
@@ -2769,7 +2849,7 @@ namespace AutoCalibrationSystem
             string result = System.Text.Encoding.Default.GetString(buf);
             ResolveDataById(result,2);             
         }
-        //保存结果到数据库
+        //保存校准结果到数据库
         private void btnsavecali_Click(object sender, EventArgs e)
         {
             if ( DAO.SaveCaliDataAll(caliData) )
@@ -2780,7 +2860,20 @@ namespace AutoCalibrationSystem
         //保存分压器测量数据到数据库
         private void btnSaveDivider_Click(object sender, EventArgs e)
         {
-            if (DAO.SaveDividerDataAll(dividerData))
+            bool result = false;
+            //判断测量种类
+            if (dividerProcess.modeMeasType)
+            {
+                //全部
+                result = DAO.SaveDividerDataAll(dividerData);
+            }
+            else
+            {
+                dividerProcess.initiMode = EnumMode.Divider_V_AC;
+                //当前，保存当前测量项的数据
+                result = DAO.SaveDividerDataByMode(dividerData, dividerProcess.initiMode);
+            }
+            if (result)
                 MessageBox.Show("保存数据成功");
             else
                 MessageBox.Show("保存数据出错");
@@ -2939,10 +3032,10 @@ namespace AutoCalibrationSystem
             switch (rb.Text)
             {
                 case "是":
-                    this.dividerProcess.modeMeasType = true;
+                    this.dividerProcess.modeCycleSwitch = true;
                     break;
                 case "否":
-                    this.dividerProcess.modeMeasType = false;
+                    this.dividerProcess.modeCycleSwitch = false;
                     break;
             }
         }
@@ -2953,7 +3046,9 @@ namespace AutoCalibrationSystem
             if (dividerState == EnumCaliState.INITI)
             {
                 //设置定时器定时时间
-                Agilent34410ATimer.Interval = 3000;
+                Agilent34410ATimer.Interval = INTERNAL;
+                Agilent34410ATimer_2.Interval = INTERNAL;
+                TandHTimer.Interval = INTERNAL;
             }
             //从取消校准，开始校准
             else if (dividerState == EnumCaliState.CANCEL)
@@ -2973,6 +3068,11 @@ namespace AutoCalibrationSystem
                 MessageBox.Show("标准表2未连接");
                 return;
             }
+            if (!comTandH.IsOpen)
+            {
+                MessageBox.Show("温湿度模块未连接");
+                return;
+            }
             //根据模式判断源是否已连接，打开对应定时器
             switch (dividerProcess.curMode)
             {
@@ -2984,7 +3084,7 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        Fluke5520ATimer.Interval = 3000;
+                        Fluke5520ATimer.Interval = INTERNAL;
                         Fluke5520ATimer.Enabled = true;
                         instrumentsState.Fluke5520AState = EnumInstrumentState.LOCAL;
                     }
@@ -2997,7 +3097,7 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        CS9920ATimer.Interval = 3000;
+                        CS9920ATimer.Interval = INTERNAL;
                         instrumentsState.CS9920AState = EnumInstrumentState.INIT;
                         CS9920ATimer.Enabled = true;
                     }
@@ -3011,16 +3111,19 @@ namespace AutoCalibrationSystem
                     }
                     else
                     {
-                        CS9920BTimer.Interval = 3000;
+                        CS9920BTimer.Interval = INTERNAL;
                         CS9920BTimer.Enabled = true;
                         instrumentsState.CS9920BState = EnumInstrumentState.INIT;
                     }
                     break;
             }
             Agilent34410ATimer.Enabled = true;
+            Agilent34410ATimer_2.Enabled = true;
+            TandHTimer.Enabled = true;
+
             if (dividerState != EnumCaliState.PAUSE)
             {
-                InitialProgressBar(dividerProcess.totalNum);
+                InitialProgressBar(dividerProcess.totalNum,mainMeasureType);
             }
             dividerProcess.complete = EnumCaliState.START;
             dividerState = EnumCaliState.START;

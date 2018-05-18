@@ -109,18 +109,23 @@ namespace AutoCalibrationSystem
         //返回9920高压的值
         public string getCS9920SourceString(DividerData dividerData)
         {
-            switch(this.curMode){
-                case EnumMode.Divider_V_DCP:
-                    this.curSource = dividerData.voltageDCPData[this.curNum].Source;
-                    break;
-                case EnumMode.Divider_V_DCN:
-                    this.curSource = -1*dividerData.voltageDCNData[this.curNum].Source;
-                    break;
-                case EnumMode.Divider_V_AC:
-                    this.curSource = dividerData.voltageACData[this.curNum].Source;
-                    break;
+            if (this.curNum < this.curModeTotal)
+            {
+                switch (this.curMode)
+                {
+                    case EnumMode.Divider_V_DCP:
+                        this.curSource = dividerData.voltageDCPData[this.curNum].Source;
+                        break;
+                    case EnumMode.Divider_V_DCN:
+                        this.curSource = -1 * dividerData.voltageDCNData[this.curNum].Source;
+                        break;
+                    case EnumMode.Divider_V_AC:
+                        this.curSource = dividerData.voltageACData[this.curNum].Source;
+                        break;
+                }
+                return this.curSource.ToString();
             }
-            return this.curSource.ToString();           
+            return "";           
         }
         //获取模式
         public void getCurMode(DividerData dividerData)
@@ -166,7 +171,7 @@ namespace AutoCalibrationSystem
                     //循环测量时，默认自动保存数据
                     DAO.SaveDividerDataByMode(dividerData, curMode);
                     dividerData.Reset(false, curMode);
-                    if (modeMeasType == false)
+                    if (modeMeasType)
                     {
                         //测试模式是所有模式时，根据当前模式进入到下一模式
                         switch (curMode)

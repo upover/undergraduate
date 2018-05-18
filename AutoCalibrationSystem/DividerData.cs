@@ -61,6 +61,7 @@ namespace AutoCalibrationSystem
                         voltageDCPData[i].TestOut = 0;
                         voltageDCPData[i].Humidity = 0;
                         voltageDCPData[i].Temperature = 0;
+                        voltageDCPData[i].State = 0;
                     }
                     if (measureType)
                     {
@@ -74,6 +75,7 @@ namespace AutoCalibrationSystem
                         voltageDCNData[i].TestOut = 0;
                         voltageDCNData[i].Humidity = 0;
                         voltageDCNData[i].Temperature = 0;
+                        voltageDCNData[i].State = 0;
                     }
                     if (measureType)
                     {
@@ -87,6 +89,7 @@ namespace AutoCalibrationSystem
                         voltageACData[i].TestOut = 0;
                         voltageACData[i].Humidity = 0;
                         voltageACData[i].Temperature = 0;
+                        voltageACData[i].State = 0;
                     }
                     if (measureType)
                     {
@@ -100,6 +103,7 @@ namespace AutoCalibrationSystem
                         frequencyData[i].TestOut = 0;
                         frequencyData[i].Humidity = 0;
                         frequencyData[i].Temperature = 0;
+                        frequencyData[i].State = 0;
                     }
                     if (measureType)
                     {
@@ -116,7 +120,7 @@ namespace AutoCalibrationSystem
             {
                 voltageDCPData[i].Source = i+1;
                 voltageDCNData[i].Source = -1 * (i + 1);
-                voltageACData[i].Source = i + 1;
+                voltageACData[i].Source = (i + 1)*0.07f;
                 voltageACData[i].Frequency = 50;
             }
             //以频率为变量

@@ -88,6 +88,8 @@ namespace AutoCalibrationSystem.DataAccess
         public static bool SaveDividerDataByMode(DividerData dividerData,EnumMode mode)
         {
             DataBase db = new DataBase();
+//            string sql = "ALTER TABLE `divider_data` AUTO_INCREMENT = MAX(id) + 1";
+//            db.ExecuteQuery(sql);
             DataTable sourceTable = new DataTable();
             sourceTable.TableName = "divider_data";
             sourceTable.Columns.Add("divider_id", typeof(int));

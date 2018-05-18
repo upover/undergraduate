@@ -701,7 +701,7 @@
             this.groupBox2.Size = new System.Drawing.Size(173, 347);
             this.groupBox2.TabIndex = 72;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "标准表参数配置";
+            this.groupBox2.Text = "标准表1参数配置";
             // 
             // btnLanStand
             // 
