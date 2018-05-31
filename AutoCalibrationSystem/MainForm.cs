@@ -1000,7 +1000,7 @@ namespace AutoCalibrationSystem
             }
         }
 
-        //根据当前分压器测量选项，点数限制等
+        //分压器监测时根据当前测量选项，设置模式，初始化
         private void radioButton_CheckedChanged_Divider(object sender, EventArgs e)
         {
             RadioButton rb = (RadioButton)sender;
@@ -1019,12 +1019,13 @@ namespace AutoCalibrationSystem
                     mode = EnumMode.Divider_F;
                     break;
             }
+            //设置开始模式为所选模式
             dividerProcess.initiMode = mode;
             dividerProcess.ResetProcess(mode, dividerData);
             InitDividerGridViewByMode(mode);
             Load_Page_Divider(false);
         }
-        //根据当前校准选项，变换单位，点数限制等
+        //校准时根据当前测量选项，设置模式，初始化
         private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rb = (RadioButton)sender;
@@ -1752,7 +1753,7 @@ namespace AutoCalibrationSystem
                 MessageBox.Show("接收标准表1的消息出错:" + ex.ToString());
             }
         }
-        //接收标准表2返回的数据
+        //标准表2接收返回的数据
         private void ReceiveHandler_2(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -1778,21 +1779,38 @@ namespace AutoCalibrationSystem
         //标准表接收数据后的处理函数
         public void ResolveDataById(string receiveData,int id)
         {
-            //对收到的字符进行转换
-            string[] strs = receiveData.Split('E');
-            int sign = strs[0].StartsWith("+") == true ? 1 : -1;
-            float digit = float.Parse(strs[0]);
-            int exponent = int.Parse(strs[1]);
-            float value = digit * (float)Math.Pow(10, exponent);
             if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
             {
+                //对收到的字符进行转换 电压（单位V）12V: +1.20000947E+01 电流（单位A）50mA: +4.85071641E-02
+                string[] strs = receiveData.Split('E');
+                int sign = strs[0].StartsWith("+") == true ? 1 : -1;
+                float digit = float.Parse(strs[0]);
+                int exponent = int.Parse(strs[1]);
+                float value = digit * (float)Math.Pow(10, exponent);
                 if (mainMeasureType == MainMeasureType.CALIBRATION)
                 {
+                    switch(caliProcess.curMode)
+                    {
+                        case EnumMode.IACI:
+                        case EnumMode.IACF:
+                        case EnumMode.IDC:
+                            value = value * 1000;
+                            break;
+                        case EnumMode.VACF:
+                        case EnumMode.VACVH:
+                        case EnumMode.VACVL:
+                        case EnumMode.VDCL:
+                        case EnumMode.VDCHP:
+                        case EnumMode.VDCHN:
+                            value = value / 1000;
+                            break;
+                    }
                     //保存到caliData
                     SaveStandToCaliData(value, caliProcess);
                 }
                 else
                 {
+                    value = value / 1000;
                     //保存到dividerData
                     SaveVoltToDividerData(value, dividerProcess,id);
                 }
@@ -2744,9 +2762,8 @@ namespace AutoCalibrationSystem
         {
             if (sendcountTandH > 0)
                 return;
-            string queryString = "01 03 00 00 00 02 c4 0b";
+            string queryString = CommandTandH.QueryTandH;
             byte[] queryBytes = HexString2Bytes(queryString);
-
             if (stateCS9920B == StateSource.OUT_STABLE || stateCS9920A == StateSource.OUT_STABLE || stateFluke5520A == StateSource.OUT_STABLE)
             {
                 comTandH.Write(queryBytes, 0, queryBytes.Length);
@@ -2798,11 +2815,11 @@ namespace AutoCalibrationSystem
         public void SaveTandHToDividerData(byte[] data,DividerProcess tempProcess) 
         {
             //计算温度
-            byte highT = data[5];
-            byte lowT = data[6];
+            byte highT = data[3];
+            byte lowT = data[4];
             int sign = 1;
             //温度为负，原数据用补码表示
-            if (data[5] >= 128)
+            if (data[3] >= 128)
             {
                 highT = (byte)~highT;
                 lowT = (byte)(~lowT + 1);
@@ -2810,8 +2827,8 @@ namespace AutoCalibrationSystem
             }
             float temperature = sign * (highT * 256 + lowT) / 10.0f;
             //计算湿度
-            int highH = data[3];
-            int lowH = data[4];
+            int highH = data[5];
+            int lowH = data[6];
             float humidity = (highH * 256 + lowH) / 10.0f;
             switch (tempProcess.curMode)
             {
@@ -2869,7 +2886,6 @@ namespace AutoCalibrationSystem
             }
             else
             {
-                dividerProcess.initiMode = EnumMode.Divider_V_AC;
                 //当前，保存当前测量项的数据
                 result = DAO.SaveDividerDataByMode(dividerData, dividerProcess.initiMode);
             }
@@ -3043,6 +3059,13 @@ namespace AutoCalibrationSystem
         private void btnDividerStart_Click(object sender, EventArgs e)
         {
             this.dividerProcess.initiMode = this.dividerProcess.curMode;
+            //一次监测过程完成后，重置数据再监测
+            if (dividerState == EnumCaliState.COMPLETE)
+            {
+                //重置dividerData,dividerProcess
+                dividerData.Reset(dividerProcess.modeMeasType, dividerProcess.initiMode);
+                dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData); 
+            }
             if (dividerState == EnumCaliState.INITI)
             {
                 //设置定时器定时时间
@@ -3053,7 +3076,7 @@ namespace AutoCalibrationSystem
             //从取消校准，开始校准
             else if (dividerState == EnumCaliState.CANCEL)
             {
-                //重置caliData,caliProcess
+                //重置dividerData,dividerProcess
                 dividerData.Reset(dividerProcess.modeMeasType,dividerProcess.initiMode);
                 dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData);
             }
@@ -3127,6 +3150,54 @@ namespace AutoCalibrationSystem
             }
             dividerProcess.complete = EnumCaliState.START;
             dividerState = EnumCaliState.START;
+        }
+        //分压器暂停监测
+        private void btnDividerPause_Click(object sender, EventArgs e)
+        {
+            //设置暂停标志
+            dividerState = EnumCaliState.PAUSE;
+            //停止各定时函数
+            Agilent34410ATimer.Enabled = false;
+            Agilent34410ATimer_2.Enabled = false;
+            TandHTimer.Enabled = false;
+            //根据模式判断源，关闭对应定时器
+            switch (dividerProcess.curMode)
+            {
+                case EnumMode.Divider_F:
+                    Fluke5520ATimer.Enabled = false;
+                    break;
+                case EnumMode.Divider_V_AC:
+                    CS9920ATimer.Enabled = false;
+                    break;
+                case EnumMode.Divider_V_DCP:
+                case EnumMode.Divider_V_DCN:
+                    CS9920BTimer.Enabled = false;
+                    break;
+            }
+        }
+        //分压器取消监测
+        private void btnDividerCancel_Click(object sender, EventArgs e)
+        {
+            //设置取消标志
+            dividerState = EnumCaliState.CANCEL;
+            //停止各定时函数
+            Agilent34410ATimer.Enabled = false;
+            Agilent34410ATimer_2.Enabled = false;
+            TandHTimer.Enabled = false;
+            //根据模式判断源，关闭对应定时器
+            switch (dividerProcess.curMode)
+            {
+                case EnumMode.Divider_F:
+                    Fluke5520ATimer.Enabled = false;
+                    break;
+                case EnumMode.Divider_V_AC:
+                    CS9920ATimer.Enabled = false;
+                    break;
+                case EnumMode.Divider_V_DCP:
+                case EnumMode.Divider_V_DCN:
+                    CS9920BTimer.Enabled = false;
+                    break;
+            }
         }
     }
 }

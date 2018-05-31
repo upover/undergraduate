@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaliData.cs" />
+    <Compile Include="CommandTandH.cs" />
     <Compile Include="DataAccess\DAO.cs" />
     <Compile Include="DataAccess\DataBase.cs" />
     <Compile Include="DividerProcess.cs" />

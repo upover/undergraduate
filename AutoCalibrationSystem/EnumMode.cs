@@ -20,8 +20,6 @@ namespace AutoCalibrationSystem
         Divider_V_DCP,
         Divider_V_DCN,
         Divider_V_AC,
-        Divider_F,
-        Divider_T,
-        Divider_H
+        Divider_F
     }
 }

@@ -84,3 +84,4 @@ E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\Au
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.pdb
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\bin\Debug\AutoCalibrationSystem.pdb
 E:\study\GraduateDesign\AutoCalibrationSystem\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
+G:\undergraduate\GraduateDesign\project\undergraduate\AutoCalibrationSystem\obj\Debug\AutoCalibrationSystem.csprojResolveAssemblyReference.cache
