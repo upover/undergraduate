@@ -45,7 +45,7 @@ namespace AutoCalibrationSystem
             this.changeMode = true;
             this.complete = EnumCaliState.INITI;
             this.curTotalNum = 0;
-            this.curMode = mode;
+            this.curMode = mode;           
             setTotalNumByType(dividerData);
         }
         public void setTotalNumByType(DividerData dividerData) 

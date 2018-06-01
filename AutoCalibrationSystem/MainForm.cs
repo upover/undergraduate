@@ -19,7 +19,7 @@ namespace AutoCalibrationSystem
 {
     public partial class MainForm : Form
     {
-        public const int INTERNAL = 1000;
+        public const int INTERNAL = 4000;
         public delegate void ProcessDelegate(bool nextpage);
         //进度条
         private delegate void ProgressBarShow(int i);
@@ -2032,7 +2032,10 @@ namespace AutoCalibrationSystem
             //判断是否已远控
             if (instrumentsState.Fluke5520AState == EnumInstrumentState.LOCAL)
             {
-                command += "REMOTE";
+                command = "REMOTE";
+                Fluke5520ASendCommand(command);
+                //清除队列中的错误
+                command = "*CLS";
                 Fluke5520ASendCommand(command);
                 instrumentsState.Fluke5520AState = EnumInstrumentState.REMOTE;
             }
@@ -2495,7 +2498,10 @@ namespace AutoCalibrationSystem
             
             if (instrumentsState.Fluke5520AState == EnumInstrumentState.LOCAL)
             {
-                command += "REMOTE";
+                command = "REMOTE";
+                Fluke5520ASendCommand(command);
+                //清除队列中的错误
+                command = "*CLS";
                 Fluke5520ASendCommand(command);
                 instrumentsState.Fluke5520AState = EnumInstrumentState.REMOTE;
             }
@@ -2509,7 +2515,7 @@ namespace AutoCalibrationSystem
                         if (stateFluke5520A == StateSource.OUT_STABLE)
                         {
                             //停止源输出
-                            command += "STBY";
+                            command = "STBY";
                             Fluke5520ASendCommand(command);
                             stateFluke5520A = StateSource.STOP;
                             //测量点更新为已测量
@@ -2523,9 +2529,9 @@ namespace AutoCalibrationSystem
                             dividerProcess.getCurMode(dividerData);
                             dgvDivider.Invoke(showProcess, true);
                             if (dividerProcess.complete == EnumCaliState.COMPLETE)
-                                dividerState = EnumCaliState.COMPLETE;
-                            return;
+                                dividerState = EnumCaliState.COMPLETE;                     
                         }
+                        return;
                     }
                 }
                 if (stateFluke5520A == StateSource.STOP)
@@ -2639,7 +2645,6 @@ namespace AutoCalibrationSystem
                 return;
             }
             ProcessDelegate showProcess = new ProcessDelegate(Load_Page_Divider);
-
             if (sendcount9920B != 0)
                 return;
             string command = "";
@@ -2749,8 +2754,8 @@ namespace AutoCalibrationSystem
             if (cmd == "")
                 return;
             cmd += "\r\n";//结束符
-            com5520A.Write(command);
-            Console.WriteLine("发送到5520A:" + command);
+            com5520A.Write(cmd);
+            Console.WriteLine("发送到5520A:" + cmd);
         }
         //继电器串口接收数据函数
         void comRelay_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3058,13 +3063,16 @@ namespace AutoCalibrationSystem
         //分压器开始监测
         private void btnDividerStart_Click(object sender, EventArgs e)
         {
+            ProcessDelegate showProcess = new ProcessDelegate(Load_Page_Divider);
             this.dividerProcess.initiMode = this.dividerProcess.curMode;
             //一次监测过程完成后，重置数据再监测
             if (dividerState == EnumCaliState.COMPLETE)
             {
                 //重置dividerData,dividerProcess
                 dividerData.Reset(dividerProcess.modeMeasType, dividerProcess.initiMode);
-                dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData); 
+                dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData);
+                //刷新列表
+                dgvDivider.Invoke(showProcess, false);
             }
             if (dividerState == EnumCaliState.INITI)
             {
@@ -3079,6 +3087,8 @@ namespace AutoCalibrationSystem
                 //重置dividerData,dividerProcess
                 dividerData.Reset(dividerProcess.modeMeasType,dividerProcess.initiMode);
                 dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData);
+                //刷新列表
+                dgvDivider.Invoke(showProcess, false);
             }
             //判断两个Agilent34410表是否连接
             if ((socketStand == null || !socketStand.Connected) && !comStand.IsOpen)
@@ -3198,6 +3208,23 @@ namespace AutoCalibrationSystem
                     CS9920BTimer.Enabled = false;
                     break;
             }
+        }
+        //重置分压器数据
+        public void resetDividerProcess()
+        {
+ 
+        }
+        //分压器重置结果
+        private void btnDividerReset_Click(object sender, EventArgs e)
+        {
+            ProcessDelegate showProcess = new ProcessDelegate(Load_Page_Divider);
+            //重置dividerData,dividerProcess
+            dividerData.Reset(dividerProcess.modeMeasType, dividerProcess.initiMode);
+            dividerProcess.ResetProcess(dividerProcess.initiMode, dividerData);
+            dividerGridViewModel.curModePage = 0;
+            this.progressBarDivider.Value = 0;
+            //刷新列表
+            dgvDivider.Invoke(showProcess, false);
         }
     }
 }

@@ -799,6 +799,7 @@
             this.btnDividerReset.TabIndex = 142;
             this.btnDividerReset.Text = "重置结果";
             this.btnDividerReset.UseVisualStyleBackColor = true;
+            this.btnDividerReset.Click += new System.EventHandler(this.btnDividerReset_Click);
             // 
             // groupBox7
             // 
@@ -1136,13 +1137,13 @@
             // StandDivider
             // 
             this.StandDivider.DataPropertyName = "StandOut";
-            this.StandDivider.HeaderText = "标准分压器电压";
+            this.StandDivider.HeaderText = "分压器输入电压";
             this.StandDivider.Name = "StandDivider";
             // 
             // TestDivider
             // 
             this.TestDivider.DataPropertyName = "TestOut";
-            this.TestDivider.HeaderText = "待测分压器电压";
+            this.TestDivider.HeaderText = "分压器输出电压";
             this.TestDivider.Name = "TestDivider";
             // 
             // TemperatureDivider
@@ -1167,7 +1168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 611);
+            this.ClientSize = new System.Drawing.Size(1272, 626);
             this.Controls.Add(this.dmTabCtrl);
             this.Controls.Add(this.btnanalyze);
             this.Controls.Add(this.label1);
@@ -1289,14 +1290,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton rbSmallUtilDivider;
         private System.Windows.Forms.RadioButton rbBigUtilDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModeDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SourceDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FrequencyDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StandDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TestDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TemperatureDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HumidityDivider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StateDivider;
         private System.Windows.Forms.Button btnReadCali;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RadioButton rbCycleYes;
@@ -1305,6 +1298,14 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.RadioButton rbMeasTypeCur;
         private System.Windows.Forms.RadioButton rbMeasTypeAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SourceDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FrequencyDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StandDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TestDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TemperatureDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HumidityDivider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StateDivider;
     }
 }
 
